@@ -32,6 +32,7 @@
       color: var(--dark-color);
       background-color: #f9f9f9;
       padding-bottom: 40px;
+      transition: var(--transition);
     }
     
     /* Typography */
@@ -99,6 +100,43 @@
       font-size: 1.2rem;
       color: rgba(255, 255, 255, 0.9);
       margin-top: 0.5rem;
+    }
+    
+    /* Language Selector */
+    .language-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .language-selector select {
+      padding: 8px 12px;
+      border: 1px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      background-color: white;
+    }
+    
+    .language-selector button {
+      padding: 8px 12px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .language-selector button:hover {
+      background-color: #004494;
     }
     
     /* Navigation */
@@ -441,6 +479,26 @@
       margin-bottom: 10px;
     }
     
+    /* Translation Notice */
+    .translation-notice {
+      background-color: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: var(--border-radius);
+      display: none;
+    }
+    
+    .translation-notice.show {
+      display: block;
+    }
+    
+    /* RTL support for some languages */
+    body[data-language="ar"] {
+      direction: rtl;
+      text-align: right;
+    }
+    
     /* Mobile adjustments */
     @media (max-width: 767px) {
       h1 {
@@ -462,6 +520,12 @@
       footer {
         flex-direction: column;
         align-items: flex-start;
+      }
+      
+      .language-selector {
+        position: static;
+        margin-bottom: 20px;
+        justify-content: center;
       }
     }
     
@@ -526,18 +590,34 @@
     }
   </style>
 </head>
-<body>
+<body data-language="en">
+  <!-- Language Selector -->
+  <div class="language-selector no-print">
+    <span><i class="fas fa-language"></i></span>
+    <select id="languageSelect">
+      <option value="en">English</option>
+      <option value="th">ไทย (Thai)</option>
+      <option value="zh">中文 (Chinese)</option>
+    </select>
+    <button id="translateBtn"><i class="fas fa-sync-alt"></i> Translate</button>
+  </div>
+  
+  <!-- Translation Notice -->
+  <div class="translation-notice" id="translationNotice">
+    <p><i class="fas fa-info-circle"></i> <strong>Note:</strong> This page has been automatically translated. Some translations may be imperfect. <button onclick="revertTranslation()" style="margin-left: 10px; padding: 5px 10px; font-size: 0.9rem;">Show Original</button></p>
+  </div>
+  
   <header>
     <div class="container">
-      <h1>Corruption in Germany: Research & Essay Assistant</h1>
-      <p class="subtitle">Open-access resources, positionality guidance, and essay tools for academic research on corruption in Germany</p>
+      <h1 id="mainTitle">Corruption in Germany: Research & Essay Assistant</h1>
+      <p class="subtitle" id="mainSubtitle">Open-access resources, positionality guidance, and essay tools for academic research on corruption in Germany</p>
       
       <nav aria-label="Main navigation">
         <ul>
-          <li><a href="#positionality"><i class="fas fa-user-circle"></i> Positionality Guide</a></li>
-          <li><a href="#articles"><i class="fas fa-newspaper"></i> Research Articles</a></li>
-          <li><a href="#essay-tools"><i class="fas fa-edit"></i> Essay Tools</a></li>
-          <li><a href="#resources"><i class="fas fa-external-link-alt"></i> External Resources</a></li>
+          <li><a href="#positionality" id="navPositionality"><i class="fas fa-user-circle"></i> Positionality Guide</a></li>
+          <li><a href="#articles" id="navArticles"><i class="fas fa-newspaper"></i> Research Articles</a></li>
+          <li><a href="#essay-tools" id="navEssayTools"><i class="fas fa-edit"></i> Essay Tools</a></li>
+          <li><a href="#resources" id="navResources"><i class="fas fa-external-link-alt"></i> External Resources</a></li>
         </ul>
       </nav>
     </div>
@@ -549,125 +629,125 @@
       <div class="left-column">
         <!-- Positionality Section -->
         <section id="positionality">
-          <h2><i class="fas fa-user-circle"></i> Writing a Positionality Paper</h2>
-          <p>Based on Dr. Adam Crymble's approach from UCL, this guide helps you reflect on your positionality when researching corruption in Germany.</p>
+          <h2><i class="fas fa-user-circle"></i> <span id="positionalityTitle">Writing a Positionality Paper</span></h2>
+          <p id="positionalityDesc">Based on Dr. Adam Crymble's approach from UCL, this guide helps you reflect on your positionality when researching corruption in Germany.</p>
           
-          <h3>Step 1: You and Your Positionality in Context</h3>
+          <h3 id="step1Title">Step 1: You and Your Positionality in Context</h3>
           
           <div class="positionality-example">
-            <h4>Example Topic: Should Germany prioritize economic growth over anti-corruption measures if they slow down business?</h4>
-            <div class="example-tag">Politics vs. Ethics Debate</div>
+            <h4 id="exampleTopicTitle">Example Topic: Should Germany prioritize economic growth over anti-corruption measures if they slow down business?</h4>
+            <div class="example-tag" id="exampleTag">Politics vs. Ethics Debate</div>
             
-            <p><strong>1) You & Your Topic</strong><br>
-            Which factors in your life most affect your view/attitudes/approach towards this topic?</p>
+            <p><strong id="youTopicTitle">1) You & Your Topic</strong><br>
+            <span id="youTopicDesc">Which factors in your life most affect your view/attitudes/approach towards this topic?</span></p>
             
             <div class="features">
               <div class="feature-item">
                 <input type="checkbox" id="nationality" checked>
-                <label for="nationality">Nationality</label>
+                <label for="nationality" id="labelNationality">Nationality</label>
               </div>
               <div class="feature-item">
                 <input type="checkbox" id="politics" checked>
-                <label for="politics">Politics</label>
+                <label for="politics" id="labelPolitics">Politics</label>
               </div>
               <div class="feature-item">
                 <input type="checkbox" id="experience">
-                <label for="experience">Experience</label>
+                <label for="experience" id="labelExperience">Experience</label>
               </div>
               <div class="feature-item">
                 <input type="checkbox" id="education" checked>
-                <label for="education">Education</label>
+                <label for="education" id="labelEducation">Education</label>
               </div>
               <div class="feature-item">
                 <input type="checkbox" id="class">
-                <label for="class">Class</label>
+                <label for="class" id="labelClass">Class</label>
               </div>
               <div class="feature-item">
                 <input type="checkbox" id="language">
-                <label for="language">Language</label>
+                <label for="language" id="labelLanguage">Language</label>
               </div>
             </div>
           </div>
           
-          <p><strong>2) What about other people?</strong><br>
-          What factors are influencing others who write/research about this topic? Take notes on the influences/world views of several authors.</p>
+          <p><strong id="othersTitle">2) What about other people?</strong><br>
+          <span id="othersDesc">What factors are influencing others who write/research about this topic? Take notes on the influences/world views of several authors.</span></p>
           
-          <p><strong>3) How do you fit within that wider ecosystem of thought?</strong></p>
+          <p><strong id="fitTitle">3) How do you fit within that wider ecosystem of thought?</strong></p>
           
-          <h3>Positionality Writing Options</h3>
+          <h3 id="writingOptionsTitle">Positionality Writing Options</h3>
           
           <div class="positionality-example">
-            <h4>Option A: Lead with yourself, then contextualize</h4>
-            <p>"I grew up in a small German town where local corruption scandals affected community trust in politics. This personal experience shaped my belief that transparency is essential..."</p>
+            <h4 id="optionATitle">Option A: Lead with yourself, then contextualize</h4>
+            <p id="optionADesc">"I grew up in a small German town where local corruption scandals affected community trust in politics. This personal experience shaped my belief that transparency is essential..."</p>
           </div>
           
           <div class="positionality-example">
-            <h4>Option B: Lead with someone else's position</h4>
-            <p>"Sebastian Wolf's research as a political scientist has framed his worldview in ways that emphasize institutional analysis of corruption. However, my background in economics leads me to focus more on the financial incentives..."</p>
+            <h4 id="optionBTitle">Option B: Lead with someone else's position</h4>
+            <p id="optionBDesc">"Sebastian Wolf's research as a political scientist has framed his worldview in ways that emphasize institutional analysis of corruption. However, my background in economics leads me to focus more on the financial incentives..."</p>
           </div>
           
           <div class="positionality-example">
-            <h4>Option C: Start abstractly with relevant factors</h4>
-            <p>"When considering anti-corruption measures in Germany, the key factors affecting the conversation are the historical legacy of the civil service, federal vs. state responsibilities, and EU integration pressures..."</p>
+            <h4 id="optionCTitle">Option C: Start abstractly with relevant factors</h4>
+            <p id="optionCDesc">"When considering anti-corruption measures in Germany, the key factors affecting the conversation are the historical legacy of the civil service, federal vs. state responsibilities, and EU integration pressures..."</p>
           </div>
           
-          <h3>Step 2: How does this help me be better?</h3>
-          <p>Outline how you could grow or learn about aspects of yourself or your beliefs that would make you a better contributor to solutions.</p>
+          <h3 id="step2Title">Step 2: How does this help me be better?</h3>
+          <p id="step2Desc">Outline how you could grow or learn about aspects of yourself or your beliefs that would make you a better contributor to solutions.</p>
           
           <form id="reflectionForm">
-            <label for="positionalityReflection">Your Positionality Reflection:</label>
+            <label for="positionalityReflection" id="reflectionLabel">Your Positionality Reflection:</label>
             <textarea id="positionalityReflection" rows="4" placeholder="Reflect on how your background influences your approach to corruption research..."></textarea>
             
-            <label for="growthStrategy">Growth Strategy:</label>
+            <label for="growthStrategy" id="strategyLabel">Growth Strategy:</label>
             <select id="growthStrategy">
-              <option value="compromise">Strategies for compromising</option>
-              <option value="growth">Acknowledging personal growth</option>
-              <option value="dig-in">Dig in your heels (with strategy)</option>
+              <option value="compromise" id="strategyCompromise">Strategies for compromising</option>
+              <option value="growth" id="strategyGrowth">Acknowledging personal growth</option>
+              <option value="dig-in" id="strategyDigIn">Dig in your heels (with strategy)</option>
             </select>
             
-            <button type="button" id="saveReflection" class="accent"><i class="fas fa-save"></i> Save Reflection</button>
+            <button type="button" id="saveReflection" class="accent"><i class="fas fa-save"></i> <span id="saveButtonText">Save Reflection</span></button>
           </form>
         </section>
         
         <!-- Article Previews -->
         <section id="articles">
-          <h2><i class="fas fa-newspaper"></i> Research Articles</h2>
-          <p>Key scholarly articles on corruption in Germany (from uploaded materials):</p>
+          <h2><i class="fas fa-newspaper"></i> <span id="articlesTitle">Research Articles</span></h2>
+          <p id="articlesDesc">Key scholarly articles on corruption in Germany (from uploaded materials):</p>
           
           <div class="article-preview">
             <div class="article-item">
-              <div class="article-title">Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel</div>
+              <div class="article-title" id="article1Title">Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel</div>
               <div class="article-meta">
-                <span><i class="fas fa-user"></i> Sebastian Wolf</span>
-                <span><i class="fas fa-calendar"></i> 2021</span>
-                <span><i class="fas fa-tag"></i> Policy Analysis</span>
+                <span><i class="fas fa-user"></i> <span id="article1Author">Sebastian Wolf</span></span>
+                <span><i class="fas fa-calendar"></i> <span id="article1Year">2021</span></span>
+                <span><i class="fas fa-tag"></i> <span id="article1Tag">Policy Analysis</span></span>
               </div>
-              <div class="article-excerpt">
+              <div class="article-excerpt" id="article1Excerpt">
                 Chancellor Angela Merkel's second grand coalition (2013–2017) was the most successful federal government since 2005 regarding the adoption of anti-corruption measures. This article applies the multiple streams approach to explain policy changes...
               </div>
-              <button class="secondary" onclick="showArticleSummary(1)"><i class="fas fa-eye"></i> View Summary</button>
+              <button class="secondary" onclick="showArticleSummary(1)"><i class="fas fa-eye"></i> <span id="viewButton1">View Summary</span></button>
             </div>
             
             <div class="article-item">
-              <div class="article-title">Corruption in Germany: The Debate in Politics and Political Science</div>
+              <div class="article-title" id="article2Title">Corruption in Germany: The Debate in Politics and Political Science</div>
               <div class="article-meta">
-                <span><i class="fas fa-user"></i> Ulrich von Alemann</span>
-                <span><i class="fas fa-calendar"></i> 1995</span>
-                <span><i class="fas fa-tag"></i> Political Theory</span>
+                <span><i class="fas fa-user"></i> <span id="article2Author">Ulrich von Alemann</span></span>
+                <span><i class="fas fa-calendar"></i> <span id="article2Year">1995</span></span>
+                <span><i class="fas fa-tag"></i> <span id="article2Tag">Political Theory</span></span>
               </div>
-              <div class="article-excerpt">
+              <div class="article-excerpt" id="article2Excerpt">
                 Examines the German debate on corruption, challenging Theodor Eschenburg's thesis about Germany's "extremely honest" civil service. Proposes understanding corruption as "shadow politics" and outlines an agenda for systematic corruption research...
               </div>
-              <button class="secondary" onclick="showArticleSummary(2)"><i class="fas fa-eye"></i> View Summary</button>
+              <button class="secondary" onclick="showArticleSummary(2)"><i class="fas fa-eye"></i> <span id="viewButton2">View Summary</span></button>
             </div>
           </div>
           
           <div class="upload-area" id="uploadArea">
             <i class="fas fa-cloud-upload-alt"></i>
-            <h3>Upload Additional Articles</h3>
-            <p>Drag and drop PDF or text files here, or click to browse</p>
+            <h3 id="uploadTitle">Upload Additional Articles</h3>
+            <p id="uploadDesc">Drag and drop PDF or text files here, or click to browse</p>
             <input type="file" id="articleUpload" multiple accept=".pdf,.txt,.doc,.docx" style="display: none;">
-            <button onclick="document.getElementById('articleUpload').click()"><i class="fas fa-folder-open"></i> Browse Files</button>
+            <button onclick="document.getElementById('articleUpload').click()"><i class="fas fa-folder-open"></i> <span id="browseButton">Browse Files</span></button>
           </div>
           
           <ul class="file-list" id="uploadedFiles">
@@ -680,66 +760,66 @@
       <div class="right-column">
         <!-- Essay Tools -->
         <section id="essay-tools">
-          <h2><i class="fas fa-edit"></i> Essay Structure Generator</h2>
-          <p>Create a structured outline for your essay on corruption in Germany.</p>
+          <h2><i class="fas fa-edit"></i> <span id="essayToolsTitle">Essay Structure Generator</span></h2>
+          <p id="essayToolsDesc">Create a structured outline for your essay on corruption in Germany.</p>
           
           <form id="essayForm">
-            <label for="essayTopic">Essay Topic:</label>
+            <label for="essayTopic" id="essayTopicLabel">Essay Topic:</label>
             <input type="text" id="essayTopic" placeholder="e.g., The effectiveness of Germany's anti-corruption policies under Merkel" value="The effectiveness of Germany's anti-corruption policies under Merkel">
             
-            <label for="essayThesis">Thesis Statement:</label>
+            <label for="essayThesis" id="thesisLabel">Thesis Statement:</label>
             <textarea id="essayThesis" rows="3" placeholder="Your central argument...">While Chancellor Merkel's governments implemented significant anti-corruption reforms between 2013-2017, these changes were largely incremental and dependent on political constellations rather than a comprehensive anti-corruption strategy.</textarea>
             
-            <label for="essaySections">Essay Structure (comma separated):</label>
+            <label for="essaySections" id="sectionsLabel">Essay Structure (comma separated):</label>
             <input type="text" id="essaySections" value="Introduction, Historical Context, Theoretical Framework (Multiple Streams Approach), Case Study Analysis, Comparative Assessment, Limitations, Conclusion">
             
-            <button type="button" id="generateEssay" class="accent"><i class="fas fa-magic"></i> Generate Essay Structure</button>
+            <button type="button" id="generateEssay" class="accent"><i class="fas fa-magic"></i> <span id="generateButtonText">Generate Essay Structure</span></button>
           </form>
           
           <div class="output-box" id="essayOutput">
-            <h3>Your Essay Structure Will Appear Here</h3>
-            <p>Fill out the form above and click "Generate Essay Structure"</p>
+            <h3 id="outputTitle">Your Essay Structure Will Appear Here</h3>
+            <p id="outputDesc">Fill out the form above and click "Generate Essay Structure"</p>
           </div>
         </section>
         
         <!-- Resources -->
         <section id="resources">
-          <h2><i class="fas fa-external-link-alt"></i> Open-Access Resources</h2>
-          <p>Free scholarly resources for corruption research:</p>
+          <h2><i class="fas fa-external-link-alt"></i> <span id="resourcesTitle">Open-Access Resources</span></h2>
+          <p id="resourcesDesc">Free scholarly resources for corruption research:</p>
           
           <ul>
-            <li><a href="https://www.semanticscholar.org/search?q=corruption%20Germany" target="_blank" rel="noopener"><i class="fas fa-graduation-cap"></i> Semantic Scholar: Corruption in Germany</a></li>
-            <li><a href="https://archive.org/search.php?query=corruption+germany" target="_blank" rel="noopener"><i class="fas fa-archive"></i> Internet Archive: Corruption Germany</a></li>
-            <li><a href="https://doaj.org/search?source=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22corruption+germany%22%7D%7D%7D%7D" target="_blank" rel="noopener"><i class="fas fa-book-open"></i> DOAJ: Corruption Germany</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Corruption_in_Germany" target="_blank" rel="noopener"><i class="fab fa-wikipedia-w"></i> Corruption in Germany (Wikipedia)</a></li>
-            <li><a href="https://www.transparency.org/en/countries/germany" target="_blank" rel="noopener"><i class="fas fa-chart-line"></i> Transparency International: Germany</a></li>
+            <li><a href="https://www.semanticscholar.org/search?q=corruption%20Germany" target="_blank" rel="noopener"><i class="fas fa-graduation-cap"></i> <span id="resource1">Semantic Scholar: Corruption in Germany</span></a></li>
+            <li><a href="https://archive.org/search.php?query=corruption+germany" target="_blank" rel="noopener"><i class="fas fa-archive"></i> <span id="resource2">Internet Archive: Corruption Germany</span></a></li>
+            <li><a href="https://doaj.org/search?source=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22corruption+germany%22%7D%7D%7D%7D" target="_blank" rel="noopener"><i class="fas fa-book-open"></i> <span id="resource3">DOAJ: Corruption Germany</span></a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Corruption_in_Germany" target="_blank" rel="noopener"><i class="fab fa-wikipedia-w"></i> <span id="resource4">Corruption in Germany (Wikipedia)</span></a></li>
+            <li><a href="https://www.transparency.org/en/countries/germany" target="_blank" rel="noopener"><i class="fas fa-chart-line"></i> <span id="resource5">Transparency International: Germany</span></a></li>
           </ul>
           
           <div class="features" style="margin-top: 1.5rem;">
             <div class="feature-item">
               <input type="checkbox" id="feature1" checked>
-              <label for="feature1">Open-access only</label>
+              <label for="feature1" id="feature1Label">Open-access only</label>
             </div>
             <div class="feature-item">
               <input type="checkbox" id="feature2" checked>
-              <label for="feature2">Include positionality guidance</label>
+              <label for="feature2" id="feature2Label">Include positionality guidance</label>
             </div>
             <div class="feature-item">
               <input type="checkbox" id="feature3">
-              <label for="feature3">Enable translation</label>
+              <label for="feature3" id="feature3Label">Enable translation</label>
             </div>
           </div>
         </section>
         
         <!-- Quick Tools -->
         <section>
-          <h2><i class="fas fa-tools"></i> Quick Tools</h2>
+          <h2><i class="fas fa-tools"></i> <span id="toolsTitle">Quick Tools</span></h2>
           
           <div style="display: flex; flex-direction: column; gap: 10px;">
-            <button id="copyLinkBtn"><i class="fas fa-link"></i> Copy Page Link</button>
-            <button id="printBtn" class="secondary"><i class="fas fa-print"></i> Print Resources</button>
-            <button id="accessibilityBtn"><i class="fas fa-universal-access"></i> Accessibility Info</button>
-            <button onclick="showPositionalityTips()"><i class="fas fa-lightbulb"></i> Positionality Tips</button>
+            <button id="copyLinkBtn"><i class="fas fa-link"></i> <span id="copyLinkText">Copy Page Link</span></button>
+            <button id="printBtn" class="secondary"><i class="fas fa-print"></i> <span id="printText">Print Resources</span></button>
+            <button id="accessibilityBtn"><i class="fas fa-universal-access"></i> <span id="accessibilityText">Accessibility Info</span></button>
+            <button onclick="showPositionalityTips()"><i class="fas fa-lightbulb"></i> <span id="tipsText">Positionality Tips</span></button>
           </div>
           
           <div id="copyStatus" class="status-message" style="display: none;"></div>
@@ -749,12 +829,12 @@
     
     <footer>
       <div class="footer-info">
-        <p><strong>Corruption in Germany Research Tool</strong><br>
-        An open-access resource for academic research and essay writing. No server code, no paid APIs. All processing happens in your browser.</p>
+        <p><strong id="footerTitle">Corruption in Germany Research Tool</strong><br>
+        <span id="footerDesc">An open-access resource for academic research and essay writing. No server code, no paid APIs. All processing happens in your browser.</span></p>
       </div>
       
       <div>
-        <button id="resetBtn" class="secondary"><i class="fas fa-redo"></i> Reset All</button>
+        <button id="resetBtn" class="secondary"><i class="fas fa-redo"></i> <span id="resetText">Reset All</span></button>
       </div>
     </footer>
   </div>
@@ -773,9 +853,9 @@
   <div class="modal" id="accessibilityModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeAccessibilityModal()">&times;</span>
-      <h2><i class="fas fa-universal-access"></i> Accessibility & Credits</h2>
+      <h2><i class="fas fa-universal-access"></i> <span id="accessibilityModalTitle">Accessibility & Credits</span></h2>
       
-      <ul style="margin: 1.5rem 0; padding-left: 1.5rem;">
+      <ul style="margin: 1.5rem 0; padding-left: 1.5rem;" id="accessibilityList">
         <li>All article links are open-access/free (Semantic Scholar, Internet Archive, DOAJ)</li>
         <li>Translation available via browser tools or Google Translate</li>
         <li>All preview and upload features are client-side only—no server code, no paid APIs</li>
@@ -785,19 +865,357 @@
         <li>Screen reader compatible structure</li>
       </ul>
       
-      <h3>Credits</h3>
-      <p>Based on materials from:</p>
-      <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
+      <h3 id="creditsTitle">Credits</h3>
+      <p id="creditsDesc">Based on materials from:</p>
+      <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;" id="creditsList">
         <li>UCL Positionality Paper Guide (Dr. Adam Crymble)</li>
         <li>"Explaining Change in Germany's Anti-corruption Policy" by Sebastian Wolf</li>
         <li>"Corruption in Germany: The Debate in Politics and Political Science" by Ulrich von Alemann</li>
       </ul>
       
-      <p><em>This tool is for educational purposes only.</em></p>
+      <p id="educationalNote"><em>This tool is for educational purposes only.</em></p>
     </div>
   </div>
   
   <script>
+    // Translation dictionaries
+    const translations = {
+      en: {
+        // Main elements
+        mainTitle: "Corruption in Germany: Research & Essay Assistant",
+        mainSubtitle: "Open-access resources, positionality guidance, and essay tools for academic research on corruption in Germany",
+        
+        // Navigation
+        navPositionality: "Positionality Guide",
+        navArticles: "Research Articles",
+        navEssayTools: "Essay Tools",
+        navResources: "External Resources",
+        
+        // Positionality section
+        positionalityTitle: "Writing a Positionality Paper",
+        positionalityDesc: "Based on Dr. Adam Crymble's approach from UCL, this guide helps you reflect on your positionality when researching corruption in Germany.",
+        step1Title: "Step 1: You and Your Positionality in Context",
+        exampleTopicTitle: "Example Topic: Should Germany prioritize economic growth over anti-corruption measures if they slow down business?",
+        exampleTag: "Politics vs. Ethics Debate",
+        youTopicTitle: "1) You & Your Topic",
+        youTopicDesc: "Which factors in your life most affect your view/attitudes/approach towards this topic?",
+        othersTitle: "2) What about other people?",
+        othersDesc: "What factors are influencing others who write/research about this topic? Take notes on the influences/world views of several authors.",
+        fitTitle: "3) How do you fit within that wider ecosystem of thought?",
+        writingOptionsTitle: "Positionality Writing Options",
+        optionATitle: "Option A: Lead with yourself, then contextualize",
+        optionADesc: '"I grew up in a small German town where local corruption scandals affected community trust in politics. This personal experience shaped my belief that transparency is essential..."',
+        optionBTitle: "Option B: Lead with someone else's position",
+        optionBDesc: '"Sebastian Wolf\'s research as a political scientist has framed his worldview in ways that emphasize institutional analysis of corruption. However, my background in economics leads me to focus more on the financial incentives..."',
+        optionCTitle: "Option C: Start abstractly with relevant factors",
+        optionCDesc: '"When considering anti-corruption measures in Germany, the key factors affecting the conversation are the historical legacy of the civil service, federal vs. state responsibilities, and EU integration pressures..."',
+        step2Title: "Step 2: How does this help me be better?",
+        step2Desc: "Outline how you could grow or learn about aspects of yourself or your beliefs that would make you a better contributor to solutions.",
+        
+        // Labels
+        labelNationality: "Nationality",
+        labelPolitics: "Politics",
+        labelExperience: "Experience",
+        labelEducation: "Education",
+        labelClass: "Class",
+        labelLanguage: "Language",
+        
+        // Reflection form
+        reflectionLabel: "Your Positionality Reflection:",
+        strategyLabel: "Growth Strategy:",
+        strategyCompromise: "Strategies for compromising",
+        strategyGrowth: "Acknowledging personal growth",
+        strategyDigIn: "Dig in your heels (with strategy)",
+        saveButtonText: "Save Reflection",
+        
+        // Articles section
+        articlesTitle: "Research Articles",
+        articlesDesc: "Key scholarly articles on corruption in Germany (from uploaded materials):",
+        article1Title: "Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel",
+        article1Author: "Sebastian Wolf",
+        article1Year: "2021",
+        article1Tag: "Policy Analysis",
+        article1Excerpt: "Chancellor Angela Merkel's second grand coalition (2013–2017) was the most successful federal government since 2005 regarding the adoption of anti-corruption measures. This article applies the multiple streams approach to explain policy changes...",
+        viewButton1: "View Summary",
+        article2Title: "Corruption in Germany: The Debate in Politics and Political Science",
+        article2Author: "Ulrich von Alemann",
+        article2Year: "1995",
+        article2Tag: "Political Theory",
+        article2Excerpt: "Examines the German debate on corruption, challenging Theodor Eschenburg's thesis about Germany's 'extremely honest' civil service. Proposes understanding corruption as 'shadow politics' and outlines an agenda for systematic corruption research...",
+        viewButton2: "View Summary",
+        uploadTitle: "Upload Additional Articles",
+        uploadDesc: "Drag and drop PDF or text files here, or click to browse",
+        browseButton: "Browse Files",
+        
+        // Essay tools
+        essayToolsTitle: "Essay Structure Generator",
+        essayToolsDesc: "Create a structured outline for your essay on corruption in Germany.",
+        essayTopicLabel: "Essay Topic:",
+        thesisLabel: "Thesis Statement:",
+        sectionsLabel: "Essay Structure (comma separated):",
+        generateButtonText: "Generate Essay Structure",
+        outputTitle: "Your Essay Structure Will Appear Here",
+        outputDesc: "Fill out the form above and click 'Generate Essay Structure'",
+        
+        // Resources
+        resourcesTitle: "Open-Access Resources",
+        resourcesDesc: "Free scholarly resources for corruption research:",
+        resource1: "Semantic Scholar: Corruption in Germany",
+        resource2: "Internet Archive: Corruption Germany",
+        resource3: "DOAJ: Corruption Germany",
+        resource4: "Corruption in Germany (Wikipedia)",
+        resource5: "Transparency International: Germany",
+        
+        // Features
+        feature1Label: "Open-access only",
+        feature2Label: "Include positionality guidance",
+        feature3Label: "Enable translation",
+        
+        // Quick tools
+        toolsTitle: "Quick Tools",
+        copyLinkText: "Copy Page Link",
+        printText: "Print Resources",
+        accessibilityText: "Accessibility Info",
+        tipsText: "Positionality Tips",
+        
+        // Footer
+        footerTitle: "Corruption in Germany Research Tool",
+        footerDesc: "An open-access resource for academic research and essay writing. No server code, no paid APIs. All processing happens in your browser.",
+        resetText: "Reset All",
+        
+        // Accessibility modal
+        accessibilityModalTitle: "Accessibility & Credits",
+        creditsTitle: "Credits",
+        creditsDesc: "Based on materials from:",
+        educationalNote: "This tool is for educational purposes only.",
+        
+        // Article summaries
+        article1Summary: "Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel",
+        article2Summary: "Corruption in Germany: The Debate in Politics and Political Science"
+      },
+      th: {
+        // Main elements
+        mainTitle: "การทุจริตในเยอรมนี: ผู้ช่วยการวิจัยและการเขียนเรียงความ",
+        mainSubtitle: "แหล่งข้อมูลแบบเปิด, คำแนะนำด้านตำแหน่ง, และเครื่องมือเขียนเรียงความสำหรับการวิจัยวิชาการเกี่ยวกับการทุจริตในเยอรมนี",
+        
+        // Navigation
+        navPositionality: "คำแนะนำด้านตำแหน่ง",
+        navArticles: "บทความวิจัย",
+        navEssayTools: "เครื่องมือเขียนเรียงความ",
+        navResources: "แหล่งข้อมูลภายนอก",
+        
+        // Positionality section
+        positionalityTitle: "การเขียนเอกสารตำแหน่ง",
+        positionalityDesc: "จากแนวทางของ Dr. Adam Crymble จาก UCL คู่มือนี้ช่วยให้คุณสะท้อนถึงตำแหน่งของคุณเมื่อทำวิจัยเกี่ยวกับการทุจริตในเยอรมนี",
+        step1Title: "ขั้นตอนที่ 1: คุณและตำแหน่งของคุณในบริบท",
+        exampleTopicTitle: "หัวข้อตัวอย่าง: เยอรมนีควรให้ความสำคัญกับการเติบโตทางเศรษฐกิจเหนือมาตรการต่อต้านการทุจริตหากมาตรการเหล่านั้นชะลอการทำธุรกิจหรือไม่?",
+        exampleTag: "การโต้วาทีการเมืองกับจริยธรรม",
+        youTopicTitle: "1) คุณและหัวข้อของคุณ",
+        youTopicDesc: "ปัจจัยใดในชีวิตของคุณที่ส่งผลกระทบมากที่สุดต่อมุมมอง/ทัศนคติ/แนวทางของคุณที่มีต่อหัวข้อนี้?",
+        othersTitle: "2) แล้วคนอื่นล่ะ?",
+        othersDesc: "ปัจจัยใดที่ส่งอิทธิพลต่อผู้อื่นที่เขียน/วิจัยเกี่ยวกับหัวข้อนี้? จดบันทึกอิทธิพล/โลกทัศน์ของผู้เขียนหลายคน",
+        fitTitle: "3) คุณเข้ากับระบบนิเวศความคิดที่กว้างขึ้นนั้นได้อย่างไร?",
+        writingOptionsTitle: "ตัวเลือกการเขียนตำแหน่ง",
+        optionATitle: "ตัวเลือก A: นำด้วยตัวคุณเอง แล้วใส่บริบท",
+        optionADesc: '"ฉันเติบโตมาในเมืองเล็ก ๆ ในเยอรมนีที่คดีทุจริตในท้องถิ่นส่งผลต่อความไว้วางใจของชุมชนในการเมือง ประสบการณ์ส่วนตัวนี้ทำให้ฉันเชื่อว่าความโปร่งใสเป็นสิ่งสำคัญ..."',
+        optionBTitle: "ตัวเลือก B: นำด้วยตำแหน่งของคนอื่น",
+        optionBDesc: '"การวิจัยของ Sebastian Wolf ในฐานะนักรัฐศาสตร์ได้สร้างกรอบโลกทัศน์ของเขาด้วยวิธีที่เน้นการวิเคราะห์เชิงสถาบันของการทุจริต อย่างไรก็ตาม พื้นหลังของฉันในเศรษฐศาสตร์ทำให้ฉันเน้นไปที่แรงจูงใจทางการเงินมากขึ้น..."',
+        optionCTitle: "ตัวเลือก C: เริ่มอย่างนามธรรมด้วยปัจจัยที่เกี่ยวข้อง",
+        optionCDesc: '"เมื่อพิจารณามาตรการต่อต้านการทุจริตในเยอรมนี ปัจจัยสำคัญที่ส่งผลต่อการสนทนาคือมรดกทางประวัติศาสตร์ของข้าราชการพลเรือน ความรับผิดชอบของรัฐบาลกลางเทียบกับรัฐ และแรงกดดันในการบูรณาการสหภาพยุโรป..."',
+        step2Title: "ขั้นตอนที่ 2: สิ่งนี้ช่วยให้ฉันดีขึ้นได้อย่างไร?",
+        step2Desc: "สรุปว่าคุณจะเติบโตหรือเรียนรู้เกี่ยวกับแง่มุมของตัวเองหรือความเชื่อของคุณอย่างไรที่จะทำให้คุณเป็นผู้มีส่วนร่วมที่ดีขึ้นสำหรับการแก้ปัญหา",
+        
+        // Labels
+        labelNationality: "สัญชาติ",
+        labelPolitics: "การเมือง",
+        labelExperience: "ประสบการณ์",
+        labelEducation: "การศึกษา",
+        labelClass: "ชนชั้น",
+        labelLanguage: "ภาษา",
+        
+        // Reflection form
+        reflectionLabel: "การสะท้อนตำแหน่งของคุณ:",
+        strategyLabel: "กลยุทธ์การเติบโต:",
+        strategyCompromise: "กลยุทธ์สำหรับการประนีประนอม",
+        strategyGrowth: "ยอมรับการเติบโตส่วนบุคคล",
+        strategyDigIn: "ยืนหยัดในตำแหน่ง (ด้วยกลยุทธ์)",
+        saveButtonText: "บันทึกการสะท้อน",
+        
+        // Articles section
+        articlesTitle: "บทความวิจัย",
+        articlesDesc: "บทความวิชาการหลักเกี่ยวกับการทุจริตในเยอรมนี (จากวัสดุที่อัพโหลด):",
+        article1Title: "การอธิบายการเปลี่ยนแปลงในนโยบายต่อต้านการทุจริตของเยอรมนีในยุคของนายกรัฐมนตรีเมอร์เคิล",
+        article1Author: "Sebastian Wolf",
+        article1Year: "2021",
+        article1Tag: "การวิเคราะห์นโยบาย",
+        article1Excerpt: "แนวร่วมใหญ่ครั้งที่สองของนายกรัฐมนตรีแองเกลา เมอร์เคิล (2013–2017) เป็นรัฐบาลกลางที่ประสบความสำเร็จมากที่สุดนับตั้งแต่ปี 2005 เกี่ยวกับการนำมาตรการต่อต้านการทุจริตมาใช้ บทความนี้ใช้แนวทาง multiple streams ในการอธิบายการเปลี่ยนแปลงนโยบาย...",
+        viewButton1: "ดูบทสรุป",
+        article2Title: "การทุจริตในเยอรมนี: การอภิปรายในการเมืองและรัฐศาสตร์",
+        article2Author: "Ulrich von Alemann",
+        article2Year: "1995",
+        article2Tag: "ทฤษฎีการเมือง",
+        article2Excerpt: "ตรวจสอบการอภิปรายของเยอรมันเกี่ยวกับการทุจริต ท้าทายวิทยานิพนธ์ของ Theodor Eschenburg เกี่ยวกับข้าราชการพลเรือนที่ 'ซื่อสัตย์อย่างยิ่ง' ของเยอรมนี เสนอให้เข้าใจการทุจริตในฐานะ 'การเมืองเงา' และสรุปวาระการวิจัยการทุจริตอย่างเป็นระบบ...",
+        viewButton2: "ดูบทสรุป",
+        uploadTitle: "อัพโหลดบทความเพิ่มเติม",
+        uploadDesc: "ลากและวางไฟล์ PDF หรือไฟล์ข้อความที่นี่ หรือคลิกเพื่อเรียกดู",
+        browseButton: "เรียกดูไฟล์",
+        
+        // Essay tools
+        essayToolsTitle: "ตัวสร้างโครงสร้างเรียงความ",
+        essayToolsDesc: "สร้างโครงร่างที่มีโครงสร้างสำหรับเรียงความของคุณเกี่ยวกับการทุจริตในเยอรมนี",
+        essayTopicLabel: "หัวข้อเรียงความ:",
+        thesisLabel: "คำแถลงวิทยานิพนธ์:",
+        sectionsLabel: "โครงสร้างเรียงความ (คั่นด้วยจุลภาค):",
+        generateButtonText: "สร้างโครงสร้างเรียงความ",
+        outputTitle: "โครงสร้างเรียงความของคุณจะปรากฏที่นี่",
+        outputDesc: "กรอกแบบฟอร์มด้านบนและคลิก 'สร้างโครงสร้างเรียงความ'",
+        
+        // Resources
+        resourcesTitle: "แหล่งข้อมูลแบบเปิด",
+        resourcesDesc: "แหล่งข้อมูลวิชาการฟรีสำหรับการวิจัยการทุจริต:",
+        resource1: "Semantic Scholar: การทุจริตในเยอรมนี",
+        resource2: "Internet Archive: การทุจริตเยอรมนี",
+        resource3: "DOAJ: การทุจริตเยอรมนี",
+        resource4: "การทุจริตในเยอรมนี (วิกิพีเดีย)",
+        resource5: "Transparency International: เยอรมนี",
+        
+        // Features
+        feature1Label: "เฉพาะแบบเปิดเท่านั้น",
+        feature2Label: "รวมคำแนะนำด้านตำแหน่ง",
+        feature3Label: "เปิดใช้งานการแปล",
+        
+        // Quick tools
+        toolsTitle: "เครื่องมือด่วน",
+        copyLinkText: "คัดลอกลิงก์หน้า",
+        printText: "พิมพ์ทรัพยากร",
+        accessibilityText: "ข้อมูลการเข้าถึง",
+        tipsText: "คำแนะนำด้านตำแหน่ง",
+        
+        // Footer
+        footerTitle: "เครื่องมือวิจัยการทุจริตในเยอรมนี",
+        footerDesc: "แหล่งข้อมูลแบบเปิดสำหรับการวิจัยวิชาการและการเขียนเรียงความ ไม่มีโค้ดเซิร์ฟเวอร์ ไม่มี API ที่ต้องจ่ายเงิน การประมวลผลทั้งหมดเกิดขึ้นในเบราว์เซอร์ของคุณ",
+        resetText: "รีเซ็ตทั้งหมด",
+        
+        // Accessibility modal
+        accessibilityModalTitle: "การเข้าถึงและเครดิต",
+        creditsTitle: "เครดิต",
+        creditsDesc: "จากวัสดุจาก:",
+        educationalNote: "เครื่องมือนี้มีไว้เพื่อการศึกษาเท่านั้น"
+      },
+      zh: {
+        // Main elements
+        mainTitle: "德国腐败问题：研究与论文助手",
+        mainSubtitle: "用于德国腐败学术研究的开放获取资源、立场性指导和论文工具",
+        
+        // Navigation
+        navPositionality: "立场性指南",
+        navArticles: "研究文章",
+        navEssayTools: "论文工具",
+        navResources: "外部资源",
+        
+        // Positionality section
+        positionalityTitle: "撰写立场性论文",
+        positionalityDesc: "基于伦敦大学学院 Adam Crymble 博士的方法，本指南帮助您在研究德国腐败时反思自己的立场性。",
+        step1Title: "步骤1：背景下的您和您的立场性",
+        exampleTopicTitle: "示例主题：如果反腐措施会减缓商业发展，德国是否应该优先考虑经济增长而非反腐措施？",
+        exampleTag: "政治与伦理辩论",
+        youTopicTitle: "1) 您与您的主题",
+        youTopicDesc: "您生活中的哪些因素最影响您对这个主题的看法/态度/方法？",
+        othersTitle: "2) 其他人呢？",
+        othersDesc: "哪些因素影响着其他撰写/研究此主题的人？记录几位作者的影响/世界观。",
+        fitTitle: "3) 您如何融入更广泛的思想生态系统中？",
+        writingOptionsTitle: "立场性写作选项",
+        optionATitle: "选项A：以自己为先，然后进行情境化",
+        optionADesc: '"我在德国一个小镇长大，那里的地方腐败丑闻影响了社区对政治的信任。这种个人经历塑造了我的信念：透明度至关重要..."',
+        optionBTitle: "选项B：以他人的立场为先",
+        optionBDesc: '"Sebastian Wolf 作为政治学家的研究塑造了他的世界观，强调腐败的制度分析。然而，我的经济学背景使我更关注财务激励..."',
+        optionCTitle: "选项C：从相关因素开始抽象讨论",
+        optionCDesc: '"在考虑德国的反腐措施时，影响对话的关键因素是公务员制度的历史遗产、联邦与州的职责以及欧盟一体化的压力..."',
+        step2Title: "步骤2：这如何帮助我变得更好？",
+        step2Desc: "概述您如何成长或了解自己或信仰的哪些方面，从而使您成为更好的问题解决方案贡献者。",
+        
+        // Labels
+        labelNationality: "国籍",
+        labelPolitics: "政治",
+        labelExperience: "经验",
+        labelEducation: "教育",
+        labelClass: "阶级",
+        labelLanguage: "语言",
+        
+        // Reflection form
+        reflectionLabel: "您的立场性反思：",
+        strategyLabel: "成长策略：",
+        strategyCompromise: "妥协策略",
+        strategyGrowth: "承认个人成长",
+        strategyDigIn: "坚持立场（有策略地）",
+        saveButtonText: "保存反思",
+        
+        // Articles section
+        articlesTitle: "研究文章",
+        articlesDesc: "关于德国腐败的关键学术文章（来自上传材料）：",
+        article1Title: "解释默克尔总理时代德国反腐政策的变化",
+        article1Author: "Sebastian Wolf",
+        article1Year: "2021",
+        article1Tag: "政策分析",
+        article1Excerpt: "默克尔总理的第二次大联盟（2013-2017年）是自2005年以来在采用反腐措施方面最成功的联邦政府。本文应用多源流方法来解释政策变化...",
+        viewButton1: "查看摘要",
+        article2Title: "德国腐败：政治与政治学中的辩论",
+        article2Author: "Ulrich von Alemann",
+        article2Year: "1995",
+        article2Tag: "政治理论",
+        article2Excerpt: "考察德国关于腐败的辩论，挑战 Theodor Eschenburg 关于德国'极其诚实'的公务员制度的论点。提出将腐败理解为'影子政治'，并概述了系统腐败研究议程...",
+        viewButton2: "查看摘要",
+        uploadTitle: "上传其他文章",
+        uploadDesc: "将PDF或文本文件拖放到此处，或单击浏览",
+        browseButton: "浏览文件",
+        
+        // Essay tools
+        essayToolsTitle: "论文结构生成器",
+        essayToolsDesc: "为您的关于德国腐败的论文创建结构化大纲。",
+        essayTopicLabel: "论文主题：",
+        thesisLabel: "论文陈述：",
+        sectionsLabel: "论文结构（用逗号分隔）：",
+        generateButtonText: "生成论文结构",
+        outputTitle: "您的论文结构将在此显示",
+        outputDesc: "填写上面的表格并单击'生成论文结构'",
+        
+        // Resources
+        resourcesTitle: "开放获取资源",
+        resourcesDesc: "用于腐败研究的免费学术资源：",
+        resource1: "Semantic Scholar：德国腐败",
+        resource2: "Internet Archive：德国腐败",
+        resource3: "DOAJ：德国腐败",
+        resource4: "德国腐败（维基百科）",
+        resource5: "透明国际：德国",
+        
+        // Features
+        feature1Label: "仅限开放获取",
+        feature2Label: "包括立场性指导",
+        feature3Label: "启用翻译",
+        
+        // Quick tools
+        toolsTitle: "快速工具",
+        copyLinkText: "复制页面链接",
+        printText: "打印资源",
+        accessibilityText: "可访问性信息",
+        tipsText: "立场性提示",
+        
+        // Footer
+        footerTitle: "德国腐败研究工具",
+        footerDesc: "用于学术研究和论文写作的开放获取资源。无服务器代码，无付费API。所有处理都在您的浏览器中进行。",
+        resetText: "全部重置",
+        
+        // Accessibility modal
+        accessibilityModalTitle: "可访问性与致谢",
+        creditsTitle: "致谢",
+        creditsDesc: "基于以下材料：",
+        educationalNote: "此工具仅供教育用途。"
+      }
+    };
+
+    // Store original content
+    let originalContent = {};
+    
     // DOM Elements
     const essayForm = document.getElementById('essayForm');
     const generateEssayBtn = document.getElementById('generateEssay');
@@ -811,6 +1229,106 @@
     const printBtn = document.getElementById('printBtn');
     const saveReflectionBtn = document.getElementById('saveReflection');
     const uploadArea = document.getElementById('uploadArea');
+    const languageSelect = document.getElementById('languageSelect');
+    const translateBtn = document.getElementById('translateBtn');
+    const translationNotice = document.getElementById('translationNotice');
+    
+    // Function to store original content
+    function storeOriginalContent() {
+      const elements = document.querySelectorAll('[id]');
+      elements.forEach(element => {
+        if (element.textContent && element.id && !originalContent[element.id]) {
+          originalContent[element.id] = element.textContent;
+        }
+        if (element.placeholder && !originalContent[element.id + '_placeholder']) {
+          originalContent[element.id + '_placeholder'] = element.placeholder;
+        }
+      });
+    }
+    
+    // Function to apply translation
+    function applyTranslation(language) {
+      const langData = translations[language];
+      
+      if (!langData) {
+        alert('Translation not available for this language.');
+        return;
+      }
+      
+      // Store original content if not already stored
+      if (Object.keys(originalContent).length === 0) {
+        storeOriginalContent();
+      }
+      
+      // Update all translatable elements
+      Object.keys(langData).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+          element.textContent = langData[key];
+        }
+        
+        // Handle placeholders
+        const placeholderKey = key + '_placeholder';
+        const placeholderElement = document.getElementById(key.replace('_placeholder', ''));
+        if (placeholderElement && langData[placeholderKey]) {
+          placeholderElement.placeholder = langData[placeholderKey];
+        }
+      });
+      
+      // Update language attribute on body
+      document.body.setAttribute('data-language', language);
+      
+      // Show translation notice
+      translationNotice.classList.add('show');
+      
+      // Update essay output if it exists
+      if (essayOutput.innerHTML.includes('Your Essay Structure Will Appear Here')) {
+        document.getElementById('outputTitle').textContent = langData.outputTitle || 'Your Essay Structure Will Appear Here';
+        document.getElementById('outputDesc').textContent = langData.outputDesc || 'Fill out the form above and click "Generate Essay Structure"';
+      }
+    }
+    
+    // Function to revert to original language
+    function revertTranslation() {
+      Object.keys(originalContent).forEach(key => {
+        if (key.includes('_placeholder')) {
+          const elementId = key.replace('_placeholder', '');
+          const element = document.getElementById(elementId);
+          if (element) {
+            element.placeholder = originalContent[key];
+          }
+        } else {
+          const element = document.getElementById(key);
+          if (element) {
+            element.textContent = originalContent[key];
+          }
+        }
+      });
+      
+      // Reset language attribute
+      document.body.setAttribute('data-language', 'en');
+      languageSelect.value = 'en';
+      
+      // Hide translation notice
+      translationNotice.classList.remove('show');
+    }
+    
+    // Initialize translation
+    translateBtn.addEventListener('click', function() {
+      const selectedLanguage = languageSelect.value;
+      if (selectedLanguage === 'en') {
+        revertTranslation();
+      } else {
+        applyTranslation(selectedLanguage);
+      }
+    });
+    
+    // Language selector change
+    languageSelect.addEventListener('change', function() {
+      if (this.value === 'en') {
+        revertTranslation();
+      }
+    });
     
     // Essay Structure Generator
     generateEssayBtn.addEventListener('click', function() {
@@ -819,13 +1337,13 @@
       const sections = document.getElementById('essaySections').value.split(',').map(s => s.trim()).filter(s => s.length);
       
       if (!topic || !thesis || sections.length === 0) {
-        essayOutput.innerHTML = `<div class="status-error status-message">Please fill in all fields to generate your essay structure.</div>`;
+        essayOutput.innerHTML = `<div class="status-error status-message">${translations[document.body.getAttribute('data-language') || 'en'].fillFields || 'Please fill in all fields to generate your essay structure.'}</div>`;
         return;
       }
       
-      let html = `<h3>Essay Structure: ${topic}</h3>`;
-      html += `<p><strong>Thesis Statement:</strong> ${thesis}</p>`;
-      html += `<h4>Outline:</h4><ol>`;
+      let html = `<h3>${translations[document.body.getAttribute('data-language') || 'en'].essayStructure || 'Essay Structure'}: ${topic}</h3>`;
+      html += `<p><strong>${translations[document.body.getAttribute('data-language') || 'en'].thesisStatement || 'Thesis Statement'}:</strong> ${thesis}</p>`;
+      html += `<h4>${translations[document.body.getAttribute('data-language') || 'en'].outline || 'Outline'}:</h4><ol>`;
       
       sections.forEach((section, index) => {
         html += `<li><strong>${section}</strong>`;
@@ -844,7 +1362,7 @@
       });
       
       html += `</ol>`;
-      html += `<div class="status-success status-message">Essay structure generated successfully! You can now expand each section with your research.</div>`;
+      html += `<div class="status-success status-message">${translations[document.body.getAttribute('data-language') || 'en'].essayGenerated || 'Essay structure generated successfully! You can now expand each section with your research.'}</div>`;
       
       essayOutput.innerHTML = html;
       essayOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -853,36 +1371,99 @@
     // Function to provide section suggestions
     function getSectionSuggestions(sectionTitle, index, topic) {
       const section = sectionTitle.toLowerCase();
+      const currentLang = document.body.getAttribute('data-language') || 'en';
       const suggestions = [];
       
-      if (section.includes('intro')) {
-        suggestions.push('Define key terms: corruption, anti-corruption policy');
-        suggestions.push('Present the research question');
-        suggestions.push('Outline the structure of the essay');
-      } else if (section.includes('context') || section.includes('background')) {
-        suggestions.push('Brief history of corruption in Germany');
-        suggestions.push('Key legal and institutional frameworks');
-        suggestions.push('Major corruption scandals in recent decades');
-      } else if (section.includes('theor') || section.includes('framework')) {
-        suggestions.push('Multiple streams approach (Kingdon)');
-        suggestions.push('Neo-institutionalist perspectives');
-        suggestions.push('Veto players theory');
-      } else if (section.includes('analysis') || section.includes('case')) {
-        suggestions.push('Analyze specific anti-corruption reforms');
-        suggestions.push('Compare different government periods');
-        suggestions.push('Examine political party roles (SPD as policy entrepreneur)');
-      } else if (section.includes('limitation') || section.includes('challenge')) {
-        suggestions.push('Data availability on corruption');
-        suggestions.push('Methodological constraints');
-        suggestions.push('Political sensitivities');
-      } else if (section.includes('conclu')) {
-        suggestions.push('Summarize key findings');
-        suggestions.push('Restate thesis in light of evidence');
-        suggestions.push('Suggest areas for further research');
-      } else {
-        suggestions.push('Connect to your thesis statement');
-        suggestions.push('Use evidence from the provided articles');
-        suggestions.push('Consider positionality in your analysis');
+      if (currentLang === 'en') {
+        if (section.includes('intro')) {
+          suggestions.push('Define key terms: corruption, anti-corruption policy');
+          suggestions.push('Present the research question');
+          suggestions.push('Outline the structure of the essay');
+        } else if (section.includes('context') || section.includes('background')) {
+          suggestions.push('Brief history of corruption in Germany');
+          suggestions.push('Key legal and institutional frameworks');
+          suggestions.push('Major corruption scandals in recent decades');
+        } else if (section.includes('theor') || section.includes('framework')) {
+          suggestions.push('Multiple streams approach (Kingdon)');
+          suggestions.push('Neo-institutionalist perspectives');
+          suggestions.push('Veto players theory');
+        } else if (section.includes('analysis') || section.includes('case')) {
+          suggestions.push('Analyze specific anti-corruption reforms');
+          suggestions.push('Compare different government periods');
+          suggestions.push('Examine political party roles (SPD as policy entrepreneur)');
+        } else if (section.includes('limitation') || section.includes('challenge')) {
+          suggestions.push('Data availability on corruption');
+          suggestions.push('Methodological constraints');
+          suggestions.push('Political sensitivities');
+        } else if (section.includes('conclu')) {
+          suggestions.push('Summarize key findings');
+          suggestions.push('Restate thesis in light of evidence');
+          suggestions.push('Suggest areas for further research');
+        } else {
+          suggestions.push('Connect to your thesis statement');
+          suggestions.push('Use evidence from the provided articles');
+          suggestions.push('Consider positionality in your analysis');
+        }
+      } else if (currentLang === 'th') {
+        if (section.includes('intro')) {
+          suggestions.push('กำหนดคำสำคัญ: การทุจริต, นโยบายต่อต้านการทุจริต');
+          suggestions.push('นำเสนอคำถามการวิจัย');
+          suggestions.push('สรุปโครงสร้างของเรียงความ');
+        } else if (section.includes('context') || section.includes('background')) {
+          suggestions.push('ประวัติโดยย่อของการทุจริตในเยอรมนี');
+          suggestions.push('กรอบกฎหมายและสถาบันหลัก');
+          suggestions.push('คดีทุจริตใหญ่ในทศวรรษที่ผ่านมา');
+        } else if (section.includes('theor') || section.includes('framework')) {
+          suggestions.push('แนวทาง multiple streams (Kingdon)');
+          suggestions.push('มุมมองสถาบันนิยมใหม่');
+          suggestions.push('ทฤษฎีผู้มีสิทธิยับยั้ง');
+        } else if (section.includes('analysis') || section.includes('case')) {
+          suggestions.push('วิเคราะห์การปฏิรูปต่อต้านการทุจริตเฉพาะ');
+          suggestions.push('เปรียบเทียบช่วงรัฐบาลต่าง ๆ');
+          suggestions.push('ตรวจสอบบทบาทพรรคการเมือง (SPD ในฐานะผู้ประกอบการนโยบาย)');
+        } else if (section.includes('limitation') || section.includes('challenge')) {
+          suggestions.push('ความพร้อมของข้อมูลเกี่ยวกับการทุจริต');
+          suggestions.push('ข้อจำกัดด้านระเบียบวิธี');
+          suggestions.push('ความอ่อนไหวทางการเมือง');
+        } else if (section.includes('conclu')) {
+          suggestions.push('สรุปผลการวิจัยหลัก');
+          suggestions.push('ระบุวิทยานิพนธ์ใหม่ในแง่ของหลักฐาน');
+          suggestions.push('แนะนำพื้นที่สำหรับการวิจัยเพิ่มเติม');
+        } else {
+          suggestions.push('เชื่อมโยงกับคำแถลงวิทยานิพนธ์ของคุณ');
+          suggestions.push('ใช้หลักฐานจากบทความที่ให้มา');
+          suggestions.push('พิจารณาตำแหน่งในการวิเคราะห์ของคุณ');
+        }
+      } else if (currentLang === 'zh') {
+        if (section.includes('intro')) {
+          suggestions.push('定义关键术语：腐败、反腐政策');
+          suggestions.push('提出研究问题');
+          suggestions.push('概述论文结构');
+        } else if (section.includes('context') || section.includes('background')) {
+          suggestions.push('德国腐败简史');
+          suggestions.push('关键法律和制度框架');
+          suggestions.push('近几十年的重大腐败丑闻');
+        } else if (section.includes('theor') || section.includes('framework')) {
+          suggestions.push('多源流方法（Kingdon）');
+          suggestions.push('新制度主义视角');
+          suggestions.push('否决者理论');
+        } else if (section.includes('analysis') || section.includes('case')) {
+          suggestions.push('分析具体的反腐改革');
+          suggestions.push('比较不同政府时期');
+          suggestions.push('考察政党角色（社民党作为政策企业家）');
+        } else if (section.includes('limitation') || section.includes('challenge')) {
+          suggestions.push('腐败数据的可用性');
+          suggestions.push('方法论限制');
+          suggestions.push('政治敏感性');
+        } else if (section.includes('conclu')) {
+          suggestions.push('总结主要发现');
+          suggestions.push('根据证据重述论文');
+          suggestions.push('建议进一步研究领域');
+        } else {
+          suggestions.push('连接到您的论文陈述');
+          suggestions.push('使用所提供文章中的证据');
+          suggestions.push('在分析中考虑立场性');
+        }
       }
       
       return suggestions;
@@ -891,6 +1472,7 @@
     // Article Upload Handler
     articleUpload.addEventListener('change', function(e) {
       const files = Array.from(e.target.files);
+      const currentLang = document.body.getAttribute('data-language') || 'en';
       
       files.forEach(file => {
         const listItem = document.createElement('li');
@@ -904,7 +1486,15 @@
       // Show success message
       const status = document.createElement('div');
       status.className = 'status-success status-message';
-      status.textContent = `${files.length} file(s) uploaded successfully.`;
+      
+      if (currentLang === 'en') {
+        status.textContent = `${files.length} file(s) uploaded successfully.`;
+      } else if (currentLang === 'th') {
+        status.textContent = `อัพโหลดไฟล์สำเร็จ ${files.length} ไฟล์`;
+      } else if (currentLang === 'zh') {
+        status.textContent = `成功上传 ${files.length} 个文件`;
+      }
+      
       uploadedFiles.parentNode.insertBefore(status, uploadedFiles);
       
       // Clear file input
@@ -950,12 +1540,18 @@
     copyLinkBtn.addEventListener('click', function() {
       navigator.clipboard.writeText(window.location.href)
         .then(() => {
-          copyStatus.textContent = 'Page link copied to clipboard!';
+          const currentLang = document.body.getAttribute('data-language') || 'en';
+          copyStatus.textContent = currentLang === 'en' ? 'Page link copied to clipboard!' :
+                                   currentLang === 'th' ? 'คัดลอกลิงก์หน้าไปยังคลิปบอร์ดแล้ว!' :
+                                   '页面链接已复制到剪贴板！';
           copyStatus.className = 'status-success status-message';
           copyStatus.style.display = 'block';
         })
         .catch(err => {
-          copyStatus.textContent = 'Failed to copy link. Please try again.';
+          const currentLang = document.body.getAttribute('data-language') || 'en';
+          copyStatus.textContent = currentLang === 'en' ? 'Failed to copy link. Please try again.' :
+                                   currentLang === 'th' ? 'ไม่สามารถคัดลอกลิงก์ได้ กรุณาลองอีกครั้ง' :
+                                   '复制链接失败。请重试。';
           copyStatus.className = 'status-error status-message';
           copyStatus.style.display = 'block';
         });
@@ -968,10 +1564,13 @@
     // Print Functionality
     printBtn.addEventListener('click', function() {
       // Create a printable version
+      const currentLang = document.body.getAttribute('data-language') || 'en';
       const printContent = `
         <html>
           <head>
-            <title>Corruption in Germany - Research Resources</title>
+            <title>${currentLang === 'en' ? 'Corruption in Germany - Research Resources' : 
+                     currentLang === 'th' ? 'การทุจริตในเยอรมนี - ทรัพยากรการวิจัย' :
+                     '德国腐败 - 研究资源'}</title>
             <style>
               body { font-family: Arial, sans-serif; line-height: 1.6; }
               h1 { color: #0057b8; border-bottom: 2px solid #ffcc00; }
@@ -984,48 +1583,84 @@
             </style>
           </head>
           <body>
-            <h1>Corruption in Germany: Research Resources</h1>
-            <p>Generated from the Corruption in Germany Research Tool</p>
+            <h1>${currentLang === 'en' ? 'Corruption in Germany: Research Resources' : 
+                 currentLang === 'th' ? 'การทุจริตในเยอรมนี: ทรัพยากรการวิจัย' :
+                 '德国腐败：研究资源'}</h1>
+            <p>${currentLang === 'en' ? 'Generated from the Corruption in Germany Research Tool' :
+                currentLang === 'th' ? 'สร้างจากเครื่องมือวิจัยการทุจริตในเยอรมนี' :
+                '从德国腐败研究工具生成'}</p>
             
             <div class="section">
-              <h2>Open-Access Resources</h2>
+              <h2>${currentLang === 'en' ? 'Open-Access Resources' : 
+                   currentLang === 'th' ? 'แหล่งข้อมูลแบบเปิด' :
+                   '开放获取资源'}</h2>
               <ul>
-                <li><a href="https://www.semanticscholar.org/search?q=corruption%20Germany">Semantic Scholar: Corruption in Germany</a></li>
-                <li><a href="https://archive.org/search.php?query=corruption+germany">Internet Archive: Corruption Germany</a></li>
-                <li><a href="https://doaj.org/search?source=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22corruption+germany%22%7D%7D%7D%7D">DOAJ: Corruption Germany</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Corruption_in_Germany">Corruption in Germany (Wikipedia)</a></li>
+                <li><a href="https://www.semanticscholar.org/search?q=corruption%20Germany">${currentLang === 'en' ? 'Semantic Scholar: Corruption in Germany' :
+                    currentLang === 'th' ? 'Semantic Scholar: การทุจริตในเยอรมนี' :
+                    'Semantic Scholar：德国腐败'}</a></li>
+                <li><a href="https://archive.org/search.php?query=corruption+germany">${currentLang === 'en' ? 'Internet Archive: Corruption Germany' :
+                    currentLang === 'th' ? 'Internet Archive: การทุจริตเยอรมนี' :
+                    'Internet Archive：德国腐败'}</a></li>
+                <li><a href="https://doaj.org/search?source=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22corruption+germany%22%7D%7D%7D%7D">${currentLang === 'en' ? 'DOAJ: Corruption Germany' :
+                    currentLang === 'th' ? 'DOAJ: การทุจริตเยอรมนี' :
+                    'DOAJ：德国腐败'}</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Corruption_in_Germany">${currentLang === 'en' ? 'Corruption in Germany (Wikipedia)' :
+                    currentLang === 'th' ? 'การทุจริตในเยอรมนี (วิกิพีเดีย)' :
+                    '德国腐败（维基百科）'}</a></li>
               </ul>
             </div>
             
             <div class="section">
-              <h2>Key Articles</h2>
+              <h2>${currentLang === 'en' ? 'Key Articles' : 
+                   currentLang === 'th' ? 'บทความสำคัญ' :
+                   '关键文章'}</h2>
               <div class="article">
-                <h3>Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel</h3>
-                <p><strong>Author:</strong> Sebastian Wolf</p>
-                <p><strong>Summary:</strong> Analyzes anti-corruption reforms during Merkel's governments using the multiple streams approach, highlighting the SPD as a policy entrepreneur during the 2013-2017 grand coalition.</p>
+                <h3>${currentLang === 'en' ? 'Explaining Change in Germany\'s Anti-corruption Policy in the Era of Chancellor Merkel' :
+                    currentLang === 'th' ? 'การอธิบายการเปลี่ยนแปลงในนโยบายต่อต้านการทุจริตของเยอรมนีในยุคของนายกรัฐมนตรีเมอร์เคิล' :
+                    '解释默克尔总理时代德国反腐政策的变化'}</h3>
+                <p><strong>${currentLang === 'en' ? 'Author:' : currentLang === 'th' ? 'ผู้เขียน:' : '作者：'}</strong> Sebastian Wolf</p>
+                <p><strong>${currentLang === 'en' ? 'Summary:' : currentLang === 'th' ? 'บทสรุป:' : '摘要：'}</strong> ${currentLang === 'en' ? 'Analyzes anti-corruption reforms during Merkel\'s governments using the multiple streams approach, highlighting the SPD as a policy entrepreneur during the 2013-2017 grand coalition.' :
+                    currentLang === 'th' ? 'วิเคราะห์การปฏิรูปต่อต้านการทุจริตระหว่างรัฐบาลของเมอร์เคิลโดยใช้แนวทาง multiple streams เน้นย้ำ SPD ในฐานะผู้ประกอบการนโยบายระหว่างแนวร่วมใหญ่ปี 2013-2017' :
+                    '使用多源流方法分析默克尔政府期间的反腐改革，强调社民党在2013-2017年大联盟期间作为政策企业家的作用。'}</p>
               </div>
               
               <div class="article">
-                <h3>Corruption in Germany: The Debate in Politics and Political Science</h3>
-                <p><strong>Author:</strong> Ulrich von Alemann</p>
-                <p><strong>Summary:</strong> Examines the German debate on corruption, challenging the myth of an "extremely honest" civil service and proposing corruption as "shadow politics."</p>
+                <h3>${currentLang === 'en' ? 'Corruption in Germany: The Debate in Politics and Political Science' :
+                    currentLang === 'th' ? 'การทุจริตในเยอรมนี: การอภิปรายในการเมืองและรัฐศาสตร์' :
+                    '德国腐败：政治与政治学中的辩论'}</h3>
+                <p><strong>${currentLang === 'en' ? 'Author:' : currentLang === 'th' ? 'ผู้เขียน:' : '作者：'}</strong> Ulrich von Alemann</p>
+                <p><strong>${currentLang === 'en' ? 'Summary:' : currentLang === 'th' ? 'บทสรุป:' : '摘要：'}</strong> ${currentLang === 'en' ? 'Examines the German debate on corruption, challenging the myth of an "extremely honest" civil service and proposing corruption as "shadow politics."' :
+                    currentLang === 'th' ? 'ตรวจสอบการอภิปรายของเยอรมันเกี่ยวกับการทุจริต ท้าทายตำนานของข้าราชการพลเรือนที่ "ซื่อสัตย์อย่างยิ่ง" และเสนอการทุจริตในฐานะ "การเมืองเงา"' :
+                    '考察德国关于腐败的辩论，挑战"极其诚实"的公务员制度神话，并提出腐败作为"影子政治"。'}</p>
               </div>
             </div>
             
             <div class="section">
-              <h2>Positionality Writing Tips</h2>
-              <p>When writing about corruption in Germany, consider:</p>
+              <h2>${currentLang === 'en' ? 'Positionality Writing Tips' : 
+                   currentLang === 'th' ? 'คำแนะนำการเขียนตำแหน่ง' :
+                   '立场性写作提示'}</h2>
+              <p>${currentLang === 'en' ? 'When writing about corruption in Germany, consider:' :
+                 currentLang === 'th' ? 'เมื่อเขียนเกี่ยวกับการทุจริตในเยอรมนี พิจารณา:' :
+                 '撰写关于德国腐败的文章时，请考虑：'}</p>
               <ul>
-                <li>Your personal background and how it shapes your perspective</li>
-                <li>The political and institutional context of your analysis</li>
-                <li>How your position compares to other researchers in the field</li>
-                <li>Strategies for addressing bias in your research</li>
+                <li>${currentLang === 'en' ? 'Your personal background and how it shapes your perspective' :
+                    currentLang === 'th' ? 'ภูมิหลังส่วนตัวของคุณและวิธีที่มันสร้างมุมมองของคุณ' :
+                    '您的个人背景以及它如何塑造您的视角'}</li>
+                <li>${currentLang === 'en' ? 'The political and institutional context of your analysis' :
+                    currentLang === 'th' ? 'บริบททางการเมืองและสถาบันของการวิเคราะห์ของคุณ' :
+                    '您分析的政治和制度背景'}</li>
+                <li>${currentLang === 'en' ? 'How your position compares to other researchers in the field' :
+                    currentLang === 'th' ? 'ตำแหน่งของคุณเปรียบเทียบกับนักวิจัยคนอื่นในสาขานี้อย่างไร' :
+                    '您的立场与该领域其他研究人员相比如何'}</li>
+                <li>${currentLang === 'en' ? 'Strategies for addressing bias in your research' :
+                    currentLang === 'th' ? 'กลยุทธ์สำหรับการจัดการกับอคติในการวิจัยของคุณ' :
+                    '解决研究中偏见的策略'}</li>
               </ul>
             </div>
             
             <p style="margin-top: 40px; font-size: 0.9em; color: #666;">
-              Printed from: ${window.location.href}<br>
-              Generated on: ${new Date().toLocaleDateString()}
+              ${currentLang === 'en' ? 'Printed from:' : currentLang === 'th' ? 'พิมพ์จาก:' : '打印自：'} ${window.location.href}<br>
+              ${currentLang === 'en' ? 'Generated on:' : currentLang === 'th' ? 'สร้างเมื่อ:' : '生成于：'} ${new Date().toLocaleDateString()}
             </p>
           </body>
         </html>
@@ -1044,21 +1679,42 @@
     saveReflectionBtn.addEventListener('click', function() {
       const reflection = document.getElementById('positionalityReflection').value;
       const strategy = document.getElementById('growthStrategy').value;
+      const currentLang = document.body.getAttribute('data-language') || 'en';
       
       if (!reflection.trim()) {
-        alert('Please enter your reflection before saving.');
+        alert(currentLang === 'en' ? 'Please enter your reflection before saving.' :
+              currentLang === 'th' ? 'กรุณากรอกการสะท้อนของคุณก่อนบันทึก' :
+              '请在保存前输入您的反思。');
         return;
       }
       
       // In a real application, this would save to localStorage or a server
       // For this demo, we'll just show a confirmation
       const strategies = {
-        'compromise': 'Strategies for compromising',
-        'growth': 'Acknowledging personal growth',
-        'dig-in': 'Digging in your heels (with strategy)'
+        'en': {
+          'compromise': 'Strategies for compromising',
+          'growth': 'Acknowledging personal growth',
+          'dig-in': 'Digging in your heels (with strategy)'
+        },
+        'th': {
+          'compromise': 'กลยุทธ์สำหรับการประนีประนอม',
+          'growth': 'ยอมรับการเติบโตส่วนบุคคล',
+          'dig-in': 'ยืนหยัดในตำแหน่ง (ด้วยกลยุทธ์)'
+        },
+        'zh': {
+          'compromise': '妥协策略',
+          'growth': '承认个人成长',
+          'dig-in': '坚持立场（有策略地）'
+        }
       };
       
-      alert(`Reflection saved!\n\nStrategy: ${strategies[strategy]}\n\nYour reflection has been saved locally. In a full application, this would be stored for future reference.`);
+      const message = currentLang === 'en' ? 
+        `Reflection saved!\n\nStrategy: ${strategies.en[strategy]}\n\nYour reflection has been saved locally. In a full application, this would be stored for future reference.` :
+        currentLang === 'th' ?
+        `บันทึกการสะท้อนแล้ว!\n\nกลยุทธ์: ${strategies.th[strategy]}\n\nการสะท้อนของคุณได้รับการบันทึกในเครื่อง ในแอปพลิเคชันเต็มรูปแบบ สิ่งนี้จะถูกเก็บไว้สำหรับการอ้างอิงในอนาคต` :
+        `反思已保存！\n\n策略：${strategies.zh[strategy]}\n\n您的反思已本地保存。在完整应用程序中，这将存储以供将来参考。`;
+      
+      alert(message);
       
       // Clear the textarea
       document.getElementById('positionalityReflection').value = '';
@@ -1077,63 +1733,176 @@
     function showArticleSummary(articleId) {
       const modal = document.getElementById('articleModal');
       const modalContent = document.getElementById('modalContent');
+      const currentLang = document.body.getAttribute('data-language') || 'en';
       
       let content = '';
       
       if (articleId === 1) {
-        content = `
-          <h2>Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel</h2>
-          <p><strong>Author:</strong> Sebastian Wolf</p>
-          <p><strong>Published:</strong> 2021, <em>German Politics and Society</em></p>
-          
-          <h3>Key Findings</h3>
-          <ul>
-            <li>Merkel's second grand coalition (2013-2017) was the most successful in anti-corruption reforms since 2005</li>
-            <li>Applies Kingdon's multiple streams approach to explain policy change</li>
-            <li>Identifies SPD as crucial policy entrepreneur during this period</li>
-            <li>CDU/CSU did not fully use veto power, allowing reforms to pass</li>
-            <li>Three case studies: bribery of parliamentarians, international corruption laws, "revolving door" regulations</li>
-          </ul>
-          
-          <h3>Theoretical Framework</h3>
-          <p>The article uses the <strong>multiple streams approach</strong>, which explains policy change through the coupling of:</p>
-          <ol>
-            <li><strong>Problem stream:</strong> Recognition of corruption as a policy problem</li>
-            <li><strong>Policy stream:</strong> Availability of viable policy solutions</li>
-            <li><strong>Political stream:</strong> Favorable political conditions and entrepreneurs</li>
-          </ol>
-          
-          <h3>Research Significance</h3>
-          <p>This study challenges neo-institutionalist explanations that focus only on path-dependencies, showing how specific political constellations enabled reform despite institutional inertia.</p>
-        `;
+        if (currentLang === 'en') {
+          content = `
+            <h2>Explaining Change in Germany's Anti-corruption Policy in the Era of Chancellor Merkel</h2>
+            <p><strong>Author:</strong> Sebastian Wolf</p>
+            <p><strong>Published:</strong> 2021, <em>German Politics and Society</em></p>
+            
+            <h3>Key Findings</h3>
+            <ul>
+              <li>Merkel's second grand coalition (2013-2017) was the most successful in anti-corruption reforms since 2005</li>
+              <li>Applies Kingdon's multiple streams approach to explain policy change</li>
+              <li>Identifies SPD as crucial policy entrepreneur during this period</li>
+              <li>CDU/CSU did not fully use veto power, allowing reforms to pass</li>
+              <li>Three case studies: bribery of parliamentarians, international corruption laws, "revolving door" regulations</li>
+            </ul>
+            
+            <h3>Theoretical Framework</h3>
+            <p>The article uses the <strong>multiple streams approach</strong>, which explains policy change through the coupling of:</p>
+            <ol>
+              <li><strong>Problem stream:</strong> Recognition of corruption as a policy problem</li>
+              <li><strong>Policy stream:</strong> Availability of viable policy solutions</li>
+              <li><strong>Political stream:</strong> Favorable political conditions and entrepreneurs</li>
+            </ol>
+            
+            <h3>Research Significance</h3>
+            <p>This study challenges neo-institutionalist explanations that focus only on path-dependencies, showing how specific political constellations enabled reform despite institutional inertia.</p>
+          `;
+        } else if (currentLang === 'th') {
+          content = `
+            <h2>การอธิบายการเปลี่ยนแปลงในนโยบายต่อต้านการทุจริตของเยอรมนีในยุคของนายกรัฐมนตรีเมอร์เคิล</h2>
+            <p><strong>ผู้เขียน:</strong> Sebastian Wolf</p>
+            <p><strong>เผยแพร่:</strong> 2021, <em>German Politics and Society</em></p>
+            
+            <h3>ผลการวิจัยหลัก</h3>
+            <ul>
+              <li>แนวร่วมใหญ่ครั้งที่สองของเมอร์เคิล (2013-2017) ประสบความสำเร็จมากที่สุดในการปฏิรูปต่อต้านการทุจริตนับตั้งแต่ปี 2005</li>
+              <li>ใช้แนวทาง multiple streams ของ Kingdon เพื่ออธิบายการเปลี่ยนแปลงนโยบาย</li>
+              <li>ระบุ SPD เป็นผู้ประกอบการนโยบายที่สำคัญในช่วงเวลานี้</li>
+              <li>CDU/CSU ไม่ได้ใช้สิทธิยับยั้งอย่างเต็มที่ ทำให้การปฏิรูปผ่านได้</li>
+              <li>กรณีศึกษาสามเรื่อง: การติดสินบนสมาชิกรัฐสภา กฎหมายการทุจริตนานาชาติ กฎระเบียบ "ประตูหมุน"</li>
+            </ul>
+            
+            <h3>กรอบทฤษฎี</h3>
+            <p>บทความนี้ใช้ <strong>แนวทาง multiple streams</strong> ซึ่งอธิบายการเปลี่ยนแปลงนโยบายผ่านการจับคู่ของ:</p>
+            <ol>
+              <li><strong>กระแสปัญหา:</strong> การรับรู้การทุจริตเป็นปัญหานโยบาย</li>
+              <li><strong>กระแสนโยบาย:</strong> ความพร้อมของโซลูชันนโยบายที่ใช้งานได้</li>
+              <li><strong>กระแสการเมือง:</strong> สภาวะทางการเมืองที่ดีและผู้ประกอบการ</li>
+            </ol>
+            
+            <h3>ความสำคัญของการวิจัย</h3>
+            <p>การศึกษานี้ท้าทายคำอธิบายของสถาบันนิยมใหม่ที่มุ่งเน้นเฉพาะการพึ่งพาเส้นทาง แสดงให้เห็นว่ากลุ่มดาวการเมืองเฉพาะสามารถเปิดใช้งานการปฏิรูปได้แม้จะมีแรงเฉื่อยของสถาบัน</p>
+          `;
+        } else if (currentLang === 'zh') {
+          content = `
+            <h2>解释默克尔总理时代德国反腐政策的变化</h2>
+            <p><strong>作者：</strong> Sebastian Wolf</p>
+            <p><strong>发表：</strong> 2021年，<em>German Politics and Society</em></p>
+            
+            <h3>主要发现</h3>
+            <ul>
+              <li>默克尔的第二次大联盟（2013-2017年）是自2005年以来在反腐改革方面最成功的</li>
+              <li>应用金登的多源流方法来解释政策变化</li>
+              <li>确定社民党在此期间是关键的政策企业家</li>
+              <li>基民盟/基社盟未完全使用否决权，使改革得以通过</li>
+              <li>三个案例研究：议员贿赂、国际腐败法律、"旋转门"规定</li>
+            </ul>
+            
+            <h3>理论框架</h3>
+            <p>本文使用<strong>多源流方法</strong>，通过以下耦合来解释政策变化：</p>
+            <ol>
+              <li><strong>问题源流：</strong>将腐败识别为政策问题</li>
+              <li><strong>政策源流：</strong>可行政策解决方案的可用性</li>
+              <li><strong>政治源流：</strong>有利的政治条件和企业家</li>
+            </ol>
+            
+            <h3>研究意义</h3>
+            <p>这项研究挑战了仅关注路径依赖的新制度主义解释，展示了特定的政治格局如何在制度惯性下促成改革。</p>
+          `;
+        }
       } else if (articleId === 2) {
-        content = `
-          <h2>Corruption in Germany: The Debate in Politics and Political Science</h2>
-          <p><strong>Author:</strong> Ulrich von Alemann</p>
-          <p><strong>Published:</strong> 1995, conference paper</p>
-          
-          <h3>Key Arguments</h3>
-          <ul>
-            <li>Challenges Theodor Eschenburg's thesis about Germany's "extremely honest" civil service</li>
-            <li>Argues corruption is not uncommon in Germany and occurs quite frequently</li>
-            <li>Proposes understanding corruption as "shadow politics" - the informal side of political systems</li>
-            <li>Presents a comprehensive research agenda for corruption studies</li>
-          </ul>
-          
-          <h3>Definition of Corruption</h3>
-          <p>Von Alemann defines corruption through an exchange logic with seven components:</p>
-          <ol>
-            <li>A buyer (corrupter) wants a rare good (order, license, position)</li>
-            <li>A seller (corruptee) can assign this good</li>
-            <li>The corruptee receives an additional incentive (beyond normal price)</li>
-            <li>This violates accepted moral standards</li>
-            <li>It damages third-party or public interests</li>
-            <li>Therefore, it is hidden and concealed</li>
-          </ol>
-          
-          <h3>Research Agenda</h3>
-          <p>The article outlines 11 steps for systematic corruption research, including typologies, levels, actors, causes, consequences, and anti-corruption strategies.</p>
-        `;
+        if (currentLang === 'en') {
+          content = `
+            <h2>Corruption in Germany: The Debate in Politics and Political Science</h2>
+            <p><strong>Author:</strong> Ulrich von Alemann</p>
+            <p><strong>Published:</strong> 1995, conference paper</p>
+            
+            <h3>Key Arguments</h3>
+            <ul>
+              <li>Challenges Theodor Eschenburg's thesis about Germany's "extremely honest" civil service</li>
+              <li>Argues corruption is not uncommon in Germany and occurs quite frequently</li>
+              <li>Proposes understanding corruption as "shadow politics" - the informal side of political systems</li>
+              <li>Presents a comprehensive research agenda for corruption studies</li>
+            </ul>
+            
+            <h3>Definition of Corruption</h3>
+            <p>Von Alemann defines corruption through an exchange logic with seven components:</p>
+            <ol>
+              <li>A buyer (corrupter) wants a rare good (order, license, position)</li>
+              <li>A seller (corruptee) can assign this good</li>
+              <li>The corruptee receives an additional incentive (beyond normal price)</li>
+              <li>This violates accepted moral standards</li>
+              <li>It damages third-party or public interests</li>
+              <li>Therefore, it is hidden and concealed</li>
+            </ol>
+            
+            <h3>Research Agenda</h3>
+            <p>The article outlines 11 steps for systematic corruption research, including typologies, levels, actors, causes, consequences, and anti-corruption strategies.</p>
+          `;
+        } else if (currentLang === 'th') {
+          content = `
+            <h2>การทุจริตในเยอรมนี: การอภิปรายในการเมืองและรัฐศาสตร์</h2>
+            <p><strong>ผู้เขียน:</strong> Ulrich von Alemann</p>
+            <p><strong>เผยแพร่:</strong> 1995, เอกสารการประชุม</p>
+            
+            <h3>ข้อโต้แย้งหลัก</h3>
+            <ul>
+              <li>ท้าทายวิทยานิพนธ์ของ Theodor Eschenburg เกี่ยวกับข้าราชการพลเรือนที่ "ซื่อสัตย์อย่างยิ่ง" ของเยอรมนี</li>
+              <li>แย้งว่าการทุจริตไม่ใช่เรื่องแปลกในเยอรมนีและเกิดขึ้นค่อนข้างบ่อย</li>
+              <li>เสนอให้เข้าใจการทุจริตในฐานะ "การเมืองเงา" - ด้านไม่เป็นทางการของระบบการเมือง</li>
+              <li>นำเสนอกระบวนวาระการวิจัยที่ครอบคลุมสำหรับการศึกษาการทุจริต</li>
+            </ul>
+            
+            <h3>คำจำกัดความของการทุจริต</h3>
+            <p>Von Alemann กำหนดการทุจริตผ่านตรรกะการแลกเปลี่ยนด้วยเจ็ดองค์ประกอบ:</p>
+            <ol>
+              <li>ผู้ซื้อ (ผู้ให้สินบน) ต้องการสินค้าหายาก (คำสั่ง, ใบอนุญาต, ตำแหน่ง)</li>
+              <li>ผู้ขาย (ผู้รับสินบน) สามารถมอบหมายสินค้านี้ได้</li>
+              <li>ผู้รับสินบนได้รับสิ่งจูงใจเพิ่มเติม (เกินราคาปกติ)</li>
+              <li>สิ่งนี้ละเมิดมาตรฐานทางศีลธรรมที่ยอมรับ</li>
+              <li>มันทำลายผลประโยชน์ของบุคคลที่สามหรือสาธารณะ</li>
+              <li>ดังนั้นจึงถูกซ่อนและปกปิด</li>
+            </ol>
+            
+            <h3>วาระการวิจัย</h3>
+            <p>บทความสรุป 11 ขั้นตอนสำหรับการวิจัยการทุจริตอย่างเป็นระบบ รวมถึงการจำแนกประเภท ระดับ ผู้กระทำ สาเหตุ ผลที่ตามมา และกลยุทธ์ต่อต้านการทุจริต</p>
+          `;
+        } else if (currentLang === 'zh') {
+          content = `
+            <h2>德国腐败：政治与政治学中的辩论</h2>
+            <p><strong>作者：</strong> Ulrich von Alemann</p>
+            <p><strong>发表：</strong> 1995年，会议论文</p>
+            
+            <h3>主要论点</h3>
+            <ul>
+              <li>挑战埃申堡关于德国"极其诚实"的公务员制度的论点</li>
+              <li>认为腐败在德国并不少见，而且相当频繁发生</li>
+              <li>提出将腐败理解为"影子政治"——政治制度的非正式面</li>
+              <li>提出了全面的腐败研究议程</li>
+            </ul>
+            
+            <h3>腐败的定义</h3>
+            <p>冯·阿勒曼通过具有七个组成部分的交换逻辑定义腐败：</p>
+            <ol>
+              <li>买方（行贿者）想要稀有物品（订单、许可证、职位）</li>
+              <li>卖方（受贿者）可以分配此物品</li>
+              <li>受贿者获得额外激励（超出正常价格）</li>
+              <li>这违反了公认的道德标准</li>
+              <li>它损害第三方或公共利益</li>
+              <li>因此，它是隐蔽和隐藏的</li>
+            </ol>
+            
+            <h3>研究议程</h3>
+            <p>文章概述了系统腐败研究的11个步骤，包括类型学、层次、行动者、原因、后果和反腐策略。</p>
+          `;
+        }
       }
       
       modalContent.innerHTML = content;
@@ -1148,51 +1917,125 @@
     function showPositionalityTips() {
       const modal = document.getElementById('articleModal');
       const modalContent = document.getElementById('modalContent');
+      const currentLang = document.body.getAttribute('data-language') || 'en';
       
-      modalContent.innerHTML = `
-        <h2><i class="fas fa-lightbulb"></i> Positionality Writing Tips</h2>
-        
-        <h3>Why Positionality Matters in Corruption Research</h3>
-        <p>Your background influences how you perceive and analyze corruption:</p>
-        <ul>
-          <li><strong>Nationality:</strong> Affects your perspective on German institutions vs. other systems</li>
-          <li><strong>Political views:</strong> Shapes your interpretation of policy successes/failures</li>
-          <li><strong>Academic discipline:</strong> Lawyers, economists, and political scientists approach corruption differently</li>
-          <li><strong>Personal experience:</strong> Direct experience with corruption affects your analysis</li>
-        </ul>
-        
-        <h3>Writing Strategies</h3>
-        <p><strong>Option A (Personal first):</strong> "As someone who grew up in [context], I initially viewed corruption as [perspective]. However, researching [author]'s work has challenged this view by showing [insight]."</p>
-        
-        <p><strong>Option B (Literature first):</strong> "[Author] approaches corruption from a [disciplinary] perspective, emphasizing [aspect]. While this illuminates [strength], my [background] leads me to also consider [additional factor]."</p>
-        
-        <p><strong>Option C (Contextual factors):</strong> "The debate on corruption in Germany revolves around [key factors]. My position aligns with [perspective] on [factor 1] but diverges on [factor 2] due to my [experience/background]."</p>
-        
-        <h3>Reflective Questions</h3>
-        <ul>
-          <li>How might my political views bias my interpretation of anti-corruption policies?</li>
-          <li>Does my disciplinary training emphasize certain aspects of corruption over others?</li>
-          <li>How does my cultural background affect what I consider "corrupt" vs. "acceptable"?</li>
-          <li>What personal experiences might make me more or less critical of certain actors?</li>
-        </ul>
-        
-        <div class="status-success status-message" style="margin-top: 1.5rem;">
-          <strong>Tip:</strong> Being transparent about your positionality strengthens your research by acknowledging potential biases and clarifying your analytical perspective.
-        </div>
-      `;
+      if (currentLang === 'en') {
+        modalContent.innerHTML = `
+          <h2><i class="fas fa-lightbulb"></i> Positionality Writing Tips</h2>
+          
+          <h3>Why Positionality Matters in Corruption Research</h3>
+          <p>Your background influences how you perceive and analyze corruption:</p>
+          <ul>
+            <li><strong>Nationality:</strong> Affects your perspective on German institutions vs. other systems</li>
+            <li><strong>Political views:</strong> Shapes your interpretation of policy successes/failures</li>
+            <li><strong>Academic discipline:</strong> Lawyers, economists, and political scientists approach corruption differently</li>
+            <li><strong>Personal experience:</strong> Direct experience with corruption affects your analysis</li>
+          </ul>
+          
+          <h3>Writing Strategies</h3>
+          <p><strong>Option A (Personal first):</strong> "As someone who grew up in [context], I initially viewed corruption as [perspective]. However, researching [author]'s work has challenged this view by showing [insight]."</p>
+          
+          <p><strong>Option B (Literature first):</strong> "[Author] approaches corruption from a [disciplinary] perspective, emphasizing [aspect]. While this illuminates [strength], my [background] leads me to also consider [additional factor]."</p>
+          
+          <p><strong>Option C (Contextual factors):</strong> "The debate on corruption in Germany revolves around [key factors]. My position aligns with [perspective] on [factor 1] but diverges on [factor 2] due to my [experience/background]."</p>
+          
+          <h3>Reflective Questions</h3>
+          <ul>
+            <li>How might my political views bias my interpretation of anti-corruption policies?</li>
+            <li>Does my disciplinary training emphasize certain aspects of corruption over others?</li>
+            <li>How does my cultural background affect what I consider "corrupt" vs. "acceptable"?</li>
+            <li>What personal experiences might make me more or less critical of certain actors?</li>
+          </ul>
+          
+          <div class="status-success status-message" style="margin-top: 1.5rem;">
+            <strong>Tip:</strong> Being transparent about your positionality strengthens your research by acknowledging potential biases and clarifying your analytical perspective.
+          </div>
+        `;
+      } else if (currentLang === 'th') {
+        modalContent.innerHTML = `
+          <h2><i class="fas fa-lightbulb"></i> คำแนะนำการเขียนตำแหน่ง</h2>
+          
+          <h3>ทำไมตำแหน่งจึงสำคัญในการวิจัยการทุจริต</h3>
+          <p>ภูมิหลังของคุณส่งผลต่อวิธีที่คุณรับรู้และวิเคราะห์การทุจริต:</p>
+          <ul>
+            <li><strong>สัญชาติ:</strong> ส่งผลต่อมุมมองของคุณเกี่ยวกับสถาบันเยอรมันเทียบกับระบบอื่น</li>
+            <li><strong>มุมมองทางการเมือง:</strong> รูปร่างการตีความความสำเร็จ/ความล้มเหลวของนโยบายของคุณ</li>
+            <li><strong>สาขาวิชาการ:</strong> ทนายความ นักเศรษฐศาสตร์ และนักรัฐศาสตร์เข้าถึงการทุจริตแตกต่างกัน</li>
+            <li><strong>ประสบการณ์ส่วนตัว:</strong> ประสบการณ์โดยตรงกับการทุจริตส่งผลต่อการวิเคราะห์ของคุณ</li>
+          </ul>
+          
+          <h3>กลยุทธ์การเขียน</h3>
+          <p><strong>ตัวเลือก A (ส่วนตัวก่อน):</strong> "ในฐานะคนที่เติบโตมาใน [บริบท] ฉันมองการทุจริตในตอนแรกว่าเป็น [มุมมอง] อย่างไรก็ตาม การวิจัยงานของ [ผู้เขียน] ได้ท้าทายมุมมองนี้โดยแสดง [ข้อมูลเชิงลึก]"</p>
+          
+          <p><strong>ตัวเลือก B (วรรณกรรมก่อน):</strong> "[ผู้เขียน] เข้าถึงการทุจริตจากมุมมอง [สาขาวิชา] เน้น [ด้าน] ในขณะที่สิ่งนี้ให้ความกระจ่าง [จุดแข็ง] [ภูมิหลัง] ของฉันทำให้ฉันพิจารณา [ปัจจัยเพิ่มเติม] ด้วย"</p>
+          
+          <p><strong>ตัวเลือก C (ปัจจัยบริบท):</strong> "การอภิปรายเกี่ยวกับการทุจริตในเยอรมนีเกี่ยวข้องกับ [ปัจจัยสำคัญ] ตำแหน่งของฉันสอดคล้องกับ [มุมมอง] เกี่ยวกับ [ปัจจัย 1] แต่แตกต่างกันใน [ปัจจัย 2] เนื่องจาก [ประสบการณ์/ภูมิหลัง] ของฉัน"</p>
+          
+          <h3>คำถามสะท้อนคิด</h3>
+          <ul>
+            <li>มุมมองทางการเมืองของฉันอาจทำให้เกิดอคติในการตีความนโยบายต่อต้านการทุจริตได้อย่างไร?</li>
+            <li>การฝึกอบรมทางวินัยของฉันเน้นด้านบางอย่างของการทุจริตเหนืออื่น ๆ หรือไม่?</li>
+            <li>ภูมิหลังทางวัฒนธรรมของฉันส่งผลต่อสิ่งที่ฉันถือว่า "ทุจริต" เทียบกับ "ยอมรับได้" อย่างไร?</li>
+            <li>ประสบการณ์ส่วนตัวใดที่อาจทำให้ฉันวิพากษ์วิจารณ์ผู้กระทำบางคนมากขึ้นหรือน้อยลง?</li>
+          </ul>
+          
+          <div class="status-success status-message" style="margin-top: 1.5rem;">
+            <strong>เคล็ดลับ:</strong> การเปิดเผยตำแหน่งของคุณอย่างโปร่งใสจะเสริมสร้างการวิจัยของคุณโดยการยอมรับอคติที่อาจเกิดขึ้นและชี้แจงมุมมองการวิเคราะห์ของคุณ
+          </div>
+        `;
+      } else if (currentLang === 'zh') {
+        modalContent.innerHTML = `
+          <h2><i class="fas fa-lightbulb"></i> 立场性写作提示</h2>
+          
+          <h3>为什么立场性在腐败研究中很重要</h3>
+          <p>您的背景影响您感知和分析腐败的方式：</p>
+          <ul>
+            <li><strong>国籍：</strong>影响您对德国机构与其他体系的看法</li>
+            <li><strong>政治观点：</strong>塑造您对政策成功/失败的解释</li>
+            <li><strong>学科背景：</strong>律师、经济学家和政治学家处理腐败的方式不同</li>
+            <li><strong>个人经验：</strong>直接接触腐败影响您的分析</li>
+          </ul>
+          
+          <h3>写作策略</h3>
+          <p><strong>选项A（个人优先）：</strong>"作为一个在[背景]中长大的人，我最初将腐败视为[观点]。然而，研究[作者]的作品通过展示[见解]挑战了这一观点。"</p>
+          
+          <p><strong>选项B（文献优先）：</strong>"[作者]从[学科]角度处理腐败，强调[方面]。虽然这阐明了[优势]，但我的[背景]使我同时考虑[额外因素]。"</p>
+          
+          <p><strong>选项C（背景因素）：</strong>"关于德国腐败的辩论围绕[关键因素]。我的立场在[因素1]上与[观点]一致，但由于我的[经验/背景]，在[因素2]上存在分歧。"</p>
+          
+          <h3>反思性问题</h3>
+          <ul>
+            <li>我的政治观点可能如何偏颇我对反腐政策的解释？</li>
+            <li>我的学科训练是否强调腐败的某些方面超过其他方面？</li>
+            <li>我的文化背景如何影响我认为什么是"腐败"与"可接受"？</li>
+            <li>哪些个人经历可能使我对某些行为者更加或更不批评？</li>
+          </ul>
+          
+          <div class="status-success status-message" style="margin-top: 1.5rem;">
+            <strong>提示：</strong>对您的立场性保持透明可以通过承认潜在偏见和澄清您的分析视角来加强您的研究。
+          </div>
+        `;
+      }
       
       modal.style.display = 'block';
     }
     
     // Reset Functionality
     resetBtn.addEventListener('click', function() {
-      if (confirm('Are you sure you want to reset all forms and clear uploaded files?')) {
+      const currentLang = document.body.getAttribute('data-language') || 'en';
+      const message = currentLang === 'en' ? 'Are you sure you want to reset all forms and clear uploaded files?' :
+                     currentLang === 'th' ? 'คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตแบบฟอร์มทั้งหมดและล้างไฟล์ที่อัพโหลด?' :
+                     '您确定要重置所有表单并清除上传的文件吗？';
+      
+      if (confirm(message)) {
         // Reset forms
         document.getElementById('essayForm').reset();
         document.getElementById('reflectionForm').reset();
         
         // Clear outputs
-        essayOutput.innerHTML = `<h3>Your Essay Structure Will Appear Here</h3><p>Fill out the form above and click "Generate Essay Structure"</p>`;
+        const currentOutputTitle = translations[currentLang]?.outputTitle || 'Your Essay Structure Will Appear Here';
+        const currentOutputDesc = translations[currentLang]?.outputDesc || 'Fill out the form above and click "Generate Essay Structure"';
+        essayOutput.innerHTML = `<h3>${currentOutputTitle}</h3><p>${currentOutputDesc}</p>`;
         
         // Clear uploaded files
         uploadedFiles.innerHTML = '';
@@ -1210,7 +2053,9 @@
         // Show confirmation
         const status = document.createElement('div');
         status.className = 'status-success status-message';
-        status.textContent = 'All forms have been reset.';
+        status.textContent = currentLang === 'en' ? 'All forms have been reset.' :
+                            currentLang === 'th' ? 'รีเซ็ตแบบฟอร์มทั้งหมดแล้ว' :
+                            '所有表单已重置。';
         status.style.position = 'fixed';
         status.style.top = '20px';
         status.style.right = '20px';
@@ -1225,6 +2070,9 @@
     
     // Initialize with a sample essay structure
     window.addEventListener('DOMContentLoaded', function() {
+      // Store original content
+      storeOriginalContent();
+      
       // Generate a sample essay structure on load
       setTimeout(() => {
         generateEssayBtn.click();
@@ -1256,7 +2104,11 @@
     // Simple translation toggle simulation
     document.getElementById('feature3').addEventListener('change', function() {
       if (this.checked) {
-        alert('Translation feature enabled. In a full implementation, this would integrate with a translation API or widget.');
+        const currentLang = document.body.getAttribute('data-language') || 'en';
+        const message = currentLang === 'en' ? 'Translation feature enabled. This page already includes Thai and Chinese translations.' :
+                       currentLang === 'th' ? 'เปิดใช้งานคุณสมบัติการแปลแล้ว หน้านี้รวมการแปลภาษาไทยและภาษาจีนอยู่แล้ว' :
+                       '已启用翻译功能。此页面已包含泰语和中文翻译。';
+        alert(message);
       }
     });
   </script>
