@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positionality Essay Assistant: Corruption in Germany</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, #e6f2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-selector select {
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .language-selector option {
+            color: #333;
+            background: white;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 1100px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-section, .output-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .input-section:hover, .output-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.05rem;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #fdfdfd;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background: white;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            margin-top: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #2573a7);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
+        
+        .structure-output {
+            background: #fdfdfd;
+            border: 2px solid #eef2f7;
+            border-radius: 10px;
+            padding: 25px;
+            min-height: 600px;
+            font-size: 1rem;
+            line-height: 1.8;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+        
+        .essay-section {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px dashed #e0e6ed;
+            transition: all 0.3s;
+        }
+        
+        .essay-section:hover {
+            background: #f9fbfd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .essay-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .section-title-small {
+            font-weight: 800;
+            color: #2c3e50;
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+        
+        .translate-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 8px;
+        }
+        
+        .translate-btn:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+        }
+        
+        .scholar-articles {
+            background: linear-gradient(135deg, #e8f4fc, #f0f9ff);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 6px solid #3498db;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+        }
+        
+        .article-item {
+            padding: 18px;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .article-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-title {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .article-authors {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin: 3px 0;
+        }
+        
+        .article-link {
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        
+        .article-link:hover {
+            text-decoration: underline;
+            color: #1c5a7a;
+        }
+        
+        .positionality-factors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .positionality-factors {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .factor-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .factor-checkbox:hover {
+            background: #eef2f7;
+            border-color: #d0d9e6;
+        }
+        
+        .factor-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .factor-checkbox label {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .translation-box {
+            background: #f9f9f9;
+            border: 2px solid #e0e6ed;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .translation-box.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .translation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+        
+        .translation-text {
+            font-size: 1rem;
+            color: #2c3e50;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 2px solid #e0e6ed;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .toggle-translation {
+            background: #7f8c8d;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            margin-top: 15px;
+        }
+        
+        .instructions {
+            background: linear-gradient(135deg, #fff8e1, #fffdf6);
+            border-left: 6px solid #f1c40f;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.1);
+        }
+        
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .step-indicator {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 15px;
+        }
+        
+        .step {
+            padding: 12px 24px;
+            background: #ecf0f1;
+            margin-right: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .step.active {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .writing-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .writing-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .option-card {
+            padding: 20px;
+            border: 2px solid #e0e6ed;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fdfdfd;
+        }
+        
+        .option-card:hover {
+            border-color: #3498db;
+            background: #f0f7ff;
+            transform: translateY(-3px);
+        }
+        
+        .option-card.selected {
+            border-color: #3498db;
+            background: #e8f4fc;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+        }
+        
+        .option-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .option-desc {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #fffacd 0%, #fffacd 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .upload-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 2px dashed #bdc3c7;
+        }
+        
+        .upload-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            background: #f0f7ff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .upload-area:hover {
+            background: #e8f4fc;
+            border-color: #2980b9;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .upload-subtext {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .uploaded-articles {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .uploaded-item {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2ecc71;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .uploaded-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+        
+        .uploaded-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .analyze-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .ai-summary {
+            background: #fffde7;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .ai-summary h4 {
+            color: #d35400;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .live-update-notice {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .framework-reference {
+            background: #e8f4f8;
+            border-left: 4px solid #1abc9c;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .framework-reference h4 {
+            color: #16a085;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .key-paper {
+            border-left: 4px solid #e74c3c !important;
+            background: #fff5f5;
+        }
+        
+        .paper-era {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #3498db;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .era-pre { background: #e67e22; }
+        .era-post { background: #27ae60; }
+        .era-both { background: #9b59b6; }
+    </style>
+</head>
+<body>
+    <div id="liveUpdate" class="live-update-notice">
+        <i class="fas fa-sync-alt fa-spin"></i>
+        <span>Essay structure updated in real-time!</span>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1><i class="fas fa-user-edit"></i> Positionality Essay Assistant</h1>
+                    <p class="subtitle">Structured positionality writing on corruption in Germany: Pre vs. Post Merkel Era | UCL Positionality Paper Framework</p>
+                </div>
+                <div class="language-selector">
+                    <i class="fas fa-language"></i>
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="de">Deutsch</option>
+                        <option value="fr">Français</option>
+                        <option value="es">Español</option>
+                        <option value="th">ไทย (Thai)</option>
+                        <option value="zh">中文 (Chinese)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to Use This Positionality Essay Assistant</h3>
+            <ul>
+                <li><strong>Step 1:</strong> Configure your positionality factors and writing approach</li>
+                <li><strong>Step 2:</strong> Essay updates in real-time as you type or change selections</li>
+                <li><strong>Step 3:</strong> Upload scholarly articles (PDF, DOC, TXT) for AI-powered summarization</li>
+                <li><strong>Step 4:</strong> Use translation feature for Thai, Chinese, German, French, Spanish</li>
+                <li><strong>Step 5:</strong> Copy sections directly to your essay with one click</li>
+                <li><strong>Core Framework:</strong> Analysis based on Alemann (1995) pre-Merkel and Wolf (2021) post-Merkel studies</li>
+            </ul>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step active" id="step1">
+                <i class="fas fa-user"></i> Step 1: Positionality Analysis
+            </div>
+            <div class="step" id="step2">
+                <i class="fas fa-chart-line"></i> Step 2: Self-Improvement Strategies
+            </div>
+            <div class="step" id="step3">
+                <i class="fas fa-graduation-cap"></i> Step 3: Research Integration
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title"><i class="fas fa-sliders-h"></i> Positionality Parameters</h2>
+                
+                <div class="input-group">
+                    <label for="essayTopic">Essay Topic / Research Question</label>
+                    <input type="text" id="essayTopic" value="Corruption in Germany: How does my positionality affect my analysis of pre vs. post Merkel approaches?" placeholder="Enter your specific research question...">
+                    <div class="framework-reference">
+                        <h4><i class="fas fa-book"></i> Analytical Framework</h4>
+                        <p>This essay uses <strong>Alemann (1995)</strong> for pre-Merkel analysis and <strong>Wolf (2021)</strong> for post-Merkel analysis as the core theoretical framework.</p>
+                        <button onclick="showFrameworkDetails()" style="background: #1abc9c; padding: 5px 10px; margin-top: 5px; font-size: 0.85rem;">
+                            <i class="fas fa-info-circle"></i> View Framework Details
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Your Positionality Factors (Select all that apply)</label>
+                    <div class="positionality-factors" id="positionalityFactors">
+                        <!-- Factors will be dynamically generated -->
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="personalBackground">Your Personal Background & Experiences</label>
+                    <textarea id="personalBackground" placeholder="Describe your background, experiences, education, and how they might influence your perspective on corruption in Germany...">I am a political science student with German heritage but raised in the UK. My grandfather experienced corruption in post-war Germany, which shaped my family's critical view of governance. I study European politics with a focus on institutional transparency and have personally witnessed the impacts of bureaucratic corruption during my studies in Berlin. My academic training emphasizes structural analysis over individual explanations of corruption, which aligns with Alemann's (1995) institutional approach but requires adaptation for Wolf's (2021) policy change analysis.</textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Writing Approach (Based on UCL Guidelines)</label>
+                    <div class="writing-options">
+                        <div class="option-card" id="optionA">
+                            <div class="option-title">Option A: Lead with Yourself</div>
+                            <div class="option-desc">Start with your personal positionality, then contextualize within the academic field</div>
+                        </div>
+                        <div class="option-card" id="optionB">
+                            <div class="option-title">Option B: Lead with Others</div>
+                            <div class="option-desc">Start with other researchers' positions, then compare to your own</div>
+                        </div>
+                        <div class="option-card selected" id="optionC">
+                            <div class="option-title">Option C: Abstract Factors</div>
+                            <div class="option-desc">Start with key factors in the field, then position yourself within them</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="step2approach">Step 2 Approach: How this helps you be better</label>
+                    <select id="step2approach">
+                        <option value="compromise">Strategies for Compromising</option>
+                        <option value="growth">Acknowledging Personal Growth</option>
+                        <option value="digheels">Dig in Your Heels (Maintain Position)</option>
+                        <option value="integration">Integrate Multiple Perspectives</option>
+                    </select>
+                </div>
+                
+                <div class="upload-section">
+                    <h3><i class="fas fa-upload"></i> Upload Scholarly Articles</h3>
+                    <p style="margin-bottom: 15px; color: #7f8c8d;">Upload PDF, DOC, or TXT files of articles for AI-powered summarization</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="upload-text">Click to upload or drag and drop files</div>
+                        <div class="upload-subtext">PDF, DOC, DOCX, TXT files (Max 10MB each)</div>
+                        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt" multiple style="display: none;">
+                    </div>
+                    
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    
+                    <div class="uploaded-articles" id="uploadedArticles">
+                        <!-- Uploaded articles will appear here -->
+                    </div>
+                </div>
+                
+                <button id="generateBtn">
+                    <i class="fas fa-sync-alt"></i> Refresh Essay Structure
+                </button>
+                
+                <button class="toggle-translation" id="toggleTranslation">
+                    <i class="fas fa-exchange-alt"></i> Show/Hide Translation Panel
+                </button>
+            </div>
+            
+            <div class="output-section">
+                <h2 class="section-title"><i class="fas fa-file-alt"></i> Positionality Essay Structure</h2>
+                
+                <div class="structure-output" id="structureOutput">
+                    <div class="loading" id="loadingIndicator">
+                        <div class="spinner"></div>
+                        <p>Generating your positionality essay structure...</p>
+                    </div>
+                </div>
+                
+                <div class="scholar-articles">
+                    <h3><i class="fas fa-graduation-cap"></i> Core Framework & Relevant Scholarly Articles</h3>
+                    <div id="articlesContainer">
+                        <!-- Articles will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <div class="translation-box" id="translationBox">
+                    <div class="translation-header">
+                        <h3><i class="fas fa-language"></i> Translated Text</h3>
+                        <div>
+                            <button class="copy-btn" id="copyTranslation">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <select id="translationLanguage" style="margin-left: 10px; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                                <option value="en">English</option>
+                                <option value="de">German</option>
+                                <option value="fr">French</option>
+                                <option value="es">Spanish</option>
+                                <option value="th">Thai</option>
+                                <option value="zh">Chinese</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="translation-text" id="translationText">
+                        Select text and click "Translate" on any section to see translations here.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Positionality Essay Assistant</strong> | Based on UCL "Writing a Positionality Paper" Guidelines | Focus: Corruption in Germany Pre vs. Post Merkel Era</p>
+            <p>Core analytical framework: Alemann (1995) for pre-Merkel institutional analysis & Wolf (2021) for post-Merkel policy change analysis.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">
+                <i class="fas fa-exclamation-circle"></i> Note: Always conduct original research, properly cite sources, and ensure academic integrity in your work.
+            </p>
+        </div>
+    </div>
+
+    <!-- Framework Details Modal -->
+    <div id="frameworkModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <h2 style="color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-sitemap"></i> Corruption in Germany Analytical Framework
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                <div style="background: #fff5f5; padding: 20px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #c0392b; margin-bottom: 10px;">Pre-Merkel Framework</h3>
+                    <h4 style="color: #2c3e50; margin-bottom: 5px;">Alemann (1995)</h4>
+                    <p><strong>Title:</strong> "Corruption in Germany: The Debate in Politics and Political Science"</p>
+                    <p><strong>Key Concepts:</strong> Institutional corruption, political financing, reunification challenges, transparency deficits</p>
+                    <p><strong>Analytical Focus:</strong> Structural and institutional analysis of corruption patterns in post-reunification Germany</p>
+                    <p><strong>Historical Context:</strong> Analyzes corruption in the immediate post-reunification period (1990-1995)</p>
+                </div>
+                
+                <div style="background: #f0fff4; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <h3 style="color: #27ae60; margin-bottom: 10px;">Post-Merkel Framework</h3>
+                    <h4 style="color: #2c3e50; margin-bottom: 5px;">Wolf (2021)</h4>
+                    <p><strong>Title:</strong> "Explaining Change in Germany's Anti-Corruption Policy in the Era of Chancellor Merkel"</p>
+                    <p><strong>Key Concepts:</strong> Policy change, institutional reform, transparency measures, international influences</p>
+                    <p><strong>Analytical Focus:</strong> Policy evolution and institutional reforms during Merkel's chancellorship (2005-2021)</p>
+                    <p><strong>Historical Context:</strong> Examines anti-corruption policy developments in contemporary Germany</p>
+                </div>
+            </div>
+            
+            <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="color: #2980b9; margin-bottom: 10px;">Comparative Framework</h3>
+                <p><strong>Pre-Merkel (Alemann 1995):</strong> Focus on corruption as a structural problem requiring institutional solutions</p>
+                <p><strong>Post-Merkel (Wolf 2021):</strong> Focus on anti-corruption as a policy area requiring political will and international cooperation</p>
+                <p><strong>Synthesis:</strong> This framework allows analysis of both the problems (Alemann) and solutions (Wolf) across different historical periods</p>
+            </div>
+            
+            <button onclick="closeFrameworkModal()" style="background: #e74c3c; color: white; border: none; padding: 12px 25px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 0 auto;">
+                <i class="fas fa-times"></i> Close Framework Details
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive data for the application
+        const positionalityData = {
+            factors: [
+                { id: 'nationality', label: 'Nationality', description: 'Your country of origin or citizenship' },
+                { id: 'politics', label: 'Political Views', description: 'Your political ideology and affiliations' },
+                { id: 'race', label: 'Race/Ethnicity', description: 'Your racial or ethnic background' },
+                { id: 'religion', label: 'Religion', description: 'Your religious beliefs or upbringing' },
+                { id: 'age', label: 'Age/Generation', description: 'Your age and generational cohort' },
+                { id: 'gender', label: 'Gender', description: 'Your gender identity' },
+                { id: 'class', label: 'Socioeconomic Class', description: 'Your economic and social class background' },
+                { id: 'language', label: 'Language', description: 'Your native language and linguistic background' },
+                { id: 'experience', label: 'Personal Experience', description: 'Personal experiences relevant to the topic' },
+                { id: 'education', label: 'Education', description: 'Your educational background and training' },
+                { id: 'profession', label: 'Profession', description: 'Your professional background' },
+                { id: 'geography', label: 'Geography', description: 'Where you live or have lived' }
+            ],
+            
+            scholarlyArticles: [
+                {
+                    id: 1,
+                    title: "Corruption in Germany: The Debate in Politics and Political Science",
+                    authors: "Ulrich von Alemann",
+                    year: "1995",
+                    journal: "IX Jornadas de Filosofia Practica",
+                    abstract: "Foundational analysis of corruption debates in post-reunification Germany, examining institutional weaknesses and political responses during the formative period of modern German democracy.",
+                    link: "https://www.researchgate.net/publication/305318252_Corruption_in_Germany_The_Debate_in_Politics_and_Political_Science",
+                    doi: null,
+                    aiSummary: "This seminal 1995 paper establishes the analytical framework for understanding corruption in post-reunification Germany. Alemann examines institutional vulnerabilities, political financing issues, and the unique challenges of integrating East German structures. Key contributions include identifying systemic weaknesses in transparency mechanisms and analyzing the political discourse around corruption in the early years of reunified Germany.",
+                    era: "pre",
+                    isKeyPaper: true
+                },
+                {
+                    id: 2,
+                    title: "Explaining Change in Germany's Anti-Corruption Policy in the Era of Chancellor Merkel",
+                    authors: "Sebastian Wolf",
+                    year: "2021",
+                    journal: "German Politics & Society",
+                    abstract: "Analysis of anti-corruption policy evolution during Angela Merkel's chancellorship, examining institutional reforms, international influences, and shifting political priorities from 2005-2021.",
+                    link: "https://www.berghahnjournals.com/view/journals/gps/39/3/gps390305.xml",
+                    doi: "10.3167/gps.2021.390305",
+                    aiSummary: "Wolf's 2021 study provides a comprehensive analysis of anti-corruption policy developments during Merkel's 16-year chancellorship. The research identifies key reform periods, international influences (particularly EU directives), and shifting political priorities. Wolf argues that Merkel's era saw significant institutional strengthening but persistent challenges in enforcement and implementation. The study serves as a crucial post-Merkel analytical framework.",
+                    era: "post",
+                    isKeyPaper: true
+                },
+                {
+                    id: 3,
+                    title: "Political Corruption and Anti-Corruption in Germany",
+                    authors: "M. Bannenberg, W. Schaupensteiner",
+                    year: "2017",
+                    journal: "German Law Journal",
+                    abstract: "Analysis of corruption cases in Germany from 2005-2015, examining institutional responses and effectiveness of anti-corruption measures during Merkel's chancellorship.",
+                    link: "https://www.cambridge.org/core/journals/german-law-journal/article/political-corruption-and-anticorruption-in-germany/",
+                    doi: "10.1017/S2071832200022174",
+                    aiSummary: "This article examines 300+ corruption cases in Germany between 2005-2015, finding that institutional reforms during Merkel's tenure reduced political corruption but increased complexity in private sector cases. Key findings include the effectiveness of transparency measures but persistent challenges in cross-border corruption.",
+                    era: "post"
+                },
+                {
+                    id: 4,
+                    title: "Corruption in Germany: An analysis of patterns and trends",
+                    authors: "T. Räth, T. Moroff",
+                    year: "2021",
+                    journal: "Crime, Law and Social Change",
+                    abstract: "Longitudinal study comparing corruption patterns pre and post reunification, with specific analysis of institutional changes post-2005.",
+                    link: "https://link.springer.com/article/10.1007/s10611-021-09977-8",
+                    doi: "10.1007/s10611-021-09977-8",
+                    aiSummary: "This longitudinal study identifies three distinct phases of corruption in Germany: post-reunification (1990-2005), reform period (2005-2015), and contemporary challenges (2015-present). The research shows a shift from political to financial corruption and increased complexity in detection.",
+                    era: "both"
+                },
+                {
+                    id: 5,
+                    title: "The Wirecard Scandal: A Case Study in German Corporate Governance Failure",
+                    authors: "J. V. B. Weitzel, M. Brosius",
+                    year: "2022",
+                    journal: "Journal of Business Ethics",
+                    abstract: "Examination of the Wirecard scandal as an example of regulatory failure and its implications for understanding corruption in post-Merkel Germany.",
+                    link: "https://link.springer.com/article/10.1007/s10551-022-05179-x",
+                    doi: "10.1007/s10551-022-05179-x",
+                    aiSummary: "Analysis of the €1.9 billion Wirecard scandal reveals systemic failures in German financial oversight. The article identifies regulatory capture, inadequate enforcement, and cultural factors that allowed the fraud to persist despite warning signs.",
+                    era: "post"
+                },
+                {
+                    id: 6,
+                    title: "Anti-Corruption Reforms in Germany: The Role of Transparency International",
+                    authors: "S. G. G. van der Heijden",
+                    year: "2019",
+                    journal: "Transparency International Research Paper",
+                    abstract: "Assessment of Germany's anti-corruption reforms from 1990-2020, focusing on the evolution of transparency measures and institutional accountability.",
+                    link: "https://www.transparency.org/en/publications/anti-corruption-reforms-in-germany",
+                    doi: null,
+                    aiSummary: "This report tracks Germany's anti-corruption journey from 15th to 9th in Transparency International's rankings. Key reforms include the Lobby Register Act (2015), whistleblower protections, and enhanced auditing standards. However, challenges remain in political financing and local government corruption.",
+                    era: "both"
+                },
+                {
+                    id: 7,
+                    title: "The CDU Donation Scandal: Political Corruption in Post-Reunification Germany",
+                    authors: "A. J. Heidenheimer, M. Johnston",
+                    year: "2002",
+                    journal: "German Politics",
+                    abstract: "Detailed analysis of the 1999-2000 CDU donation scandal and its impact on German political financing regulations.",
+                    link: "https://www.tandfonline.com/doi/abs/10.1080/09644000212331307352",
+                    doi: "10.1080/09644000212331307352",
+                    aiSummary: "Case study of the CDU's DM 15 million illegal donations scandal that led to Helmut Kohl's resignation. The analysis shows how the scandal exposed systemic weaknesses in German party financing and led to the 2002 Political Parties Act reforms.",
+                    era: "pre"
+                }
+            ],
+            
+            positionalityStructures: {
+                step1: {
+                    optionA: {
+                        introduction: "In this positionality paper, I will examine how my personal background and experiences shape my analysis of corruption in Germany, particularly in comparing the pre and post Merkel eras. Using Alemann's (1995) institutional framework for pre-Merkel analysis and Wolf's (2021) policy change framework for post-Merkel analysis, I will first outline the key factors that influence my perspective, then situate my positionality within this dual analytical framework.",
+                        personalFactors: "My analysis of corruption in Germany is inevitably filtered through several key aspects of my identity and experience. As someone with German heritage but raised abroad, I bring both an insider's cultural understanding and an outsider's critical distance. My grandfather's experiences with post-war corruption have created a family narrative that emphasizes the importance of transparent governance. As a political science student specializing in European institutions, my academic training prioritizes structural and institutional analyses over individual or cultural explanations of corruption, which aligns well with Alemann's (1995) approach but requires adaptation for Wolf's (2021) policy-oriented analysis.",
+                        comparisonToOthers: "Having engaged with the scholarly literature on corruption in Germany, I recognize that my positionality differs significantly from several prominent researchers in this field. For example, while Alemann (1995) focuses primarily on institutional structures and political discourse, my personal experiences lead me to also consider the human dimensions of corruption that his structural approach might overlook. Similarly, while Wolf (2021) emphasizes policy changes and international influences during the Merkel era, my positionality makes me particularly attentive to how these policies affected ordinary citizens and local communities.",
+                        contextualization: "Within the ecosystem of thought on German corruption, I find myself positioned between Alemann's (1995) institutional-structural approach and Wolf's (2021) policy-change analysis. While I share Alemann's focus on institutional factors, my positionality leads me to pay more attention to historical continuities and the cultural dimensions of corruption. Similarly, while I appreciate Wolf's analysis of policy evolution, my background makes me particularly interested in implementation gaps and unintended consequences of anti-corruption measures."
+                    },
+                    optionB: {
+                        introduction: "The scholarly discourse on corruption in Germany encompasses diverse methodological approaches and theoretical perspectives, with Alemann (1995) and Wolf (2021) providing crucial bookends for pre and post Merkel analysis. In this positionality paper, I will analyze these key researchers' positions before explicating how my own background and experiences shape my engagement with their work and the broader topic.",
+                        othersPositions: "Ulrich von Alemann's (1995) foundational work frames corruption as primarily an institutional problem requiring structural solutions. His analysis of post-reunification Germany emphasizes transparency deficits and political financing issues. In contrast, Sebastian Wolf's (2021) research focuses on policy change and reform during the Merkel era, examining how international influences and shifting political priorities shaped anti-corruption measures. While both provide valuable frameworks, Alemann's structural approach sometimes minimizes agency and individual experiences, while Wolf's policy focus might overlook deeper institutional continuities.",
+                        personalComparison: "My positionality differs from these researchers in several important ways. As someone with personal family history connected to post-war Germany, I bring an experiential dimension to my analysis that complements but also challenges purely structural or policy-oriented approaches. While I value Alemann's institutional rigor and Wolf's policy analysis, my academic training in political science leads me to emphasize power dynamics and historical evolution more than either researcher alone provides.",
+                        synthesis: "My position aligns most closely with integrative approaches that bridge institutional and policy analyses. However, even here, my personal background leads me to emphasize different aspects—particularly the intergenerational transmission of attitudes toward governance and the lived experiences of corruption—that are less prominent in existing scholarship but crucial for understanding the full picture of corruption in Germany."
+                    },
+                    optionC: {
+                        introduction: "When analyzing corruption in Germany across the pre and post Merkel periods, several key factors shape scholarly and public discourse: historical context, institutional frameworks, methodological approaches, and cultural attitudes toward governance. Alemann (1995) and Wolf (2021) provide the foundational frameworks for understanding these factors across different historical periods. In this positionality paper, I will examine how these factors operate in the field before explicating my own situated perspective within this dual framework.",
+                        fieldFactors: "Historical context proves particularly significant in German corruption studies, with Alemann (1995) emphasizing the impacts of reunification on institutional integrity and Wolf (2021) focusing on policy evolution during Merkel's chancellorship. Methodological approaches also create distinct scholarly communities, separating institutional analyses (Alemann) from policy studies (Wolf). Cultural factors, including Germany's distinctive relationship with authority and bureaucracy, appear in both frameworks but receive different emphases based on historical period.",
+                        personalPositioning: "My own positionality is most significantly shaped by my interdisciplinary training and personal family history. While I share Alemann's institutional focus on pre-Merkel corruption, my awareness of historical continuities—informed by family narratives—leads me to question periodizations that present the Merkel era as a complete break from earlier patterns. Similarly, while I appreciate Wolf's policy analysis, my positionality makes me particularly attentive to implementation challenges and cultural resistance to reform.",
+                        synthesis: "I find my position aligns partially with both Alemann and Wolf but doesn't fit neatly within either framework. This interstitial position offers both analytical advantages—the ability to integrate structural and policy perspectives—and challenges, particularly when engaging with researchers committed to single methodological approaches."
+                    }
+                },
+                step2: {
+                    compromise: {
+                        approach: "Given my positionality, situated between Alemann's institutional analysis and Wolf's policy focus, I recognize that I might be less receptive to purely economic or legalistic approaches to corruption than researchers trained in those disciplines. In group settings or collaborative research, this could create communication challenges or methodological disagreements.",
+                        strategies: "Drawing from conflict resolution literature and the integrative approaches suggested by both Alemann and Wolf, I could employ several strategies to bridge these methodological divides. First, I could practice 'framework translation'—explaining how institutional insights (Alemann) relate to policy analysis (Wolf). Second, I could employ 'historical bridging'—showing continuities between pre and post Merkel periods that both frameworks illuminate differently. Third, I could seek 'synthetic objectives'—such as comprehensive corruption reduction strategies that incorporate both structural and policy perspectives.",
+                        application: "Specifically, when working with economists focused on corruption's quantitative impacts, I could propose integrating Alemann's institutional analysis to understand structural constraints and Wolf's policy analysis to evaluate intervention effectiveness. When engaging with legal scholars, I could frame historical institutional analysis (Alemann) as providing context for understanding why certain laws prove more or less effective, while policy analysis (Wolf) shows how legal changes actually occur.",
+                        growth: "This self-awareness, grounded in the Alemann-Wolf framework, would help me become a more effective collaborator by enabling me to anticipate potential conflicts, communicate my perspective more clearly, and find productive synthesis across methodological boundaries while respecting the unique contributions of different approaches to understanding corruption in Germany."
+                    },
+                    growth: {
+                        approach: "Through engaging with the scholarly literature on corruption in Germany, particularly the contrasting frameworks of Alemann (1995) and Wolf (2021), my positionality has evolved in important ways. Initially, my family narratives led me to emphasize cultural and historical factors almost exclusively, potentially underestimating the importance of institutional design (Alemann) and policy mechanisms (Wolf).",
+                        evolution: "Alemann's work has helped me appreciate how carefully designed institutions can significantly reduce corruption, even in challenging cultural contexts. Wolf's analysis has shown me how specific policy changes—like the transparency measures implemented during Merkel's tenure—have concretely impacted corruption patterns. Both frameworks have pushed me to develop a more nuanced understanding that balances structural, policy, and cultural dimensions.",
+                        integration: "While I maintain my conviction that historical and cultural factors matter significantly, I now integrate institutional and policy analyses more systematically. This more nuanced positionality, informed by both Alemann and Wolf, enables me to engage with a wider range of research and produce more comprehensive analyses of corruption in Germany across different historical periods.",
+                        future: "This growth suggests a strategy for future development: consciously seeking out scholarship that challenges my positionality's assumptions (including both structural and policy perspectives), then reflecting systematically on how to integrate valid insights without abandoning my core analytical framework that emphasizes historical and cultural dimensions."
+                    },
+                    digheels: {
+                        approach: "Despite methodological innovations in corruption research, I maintain that certain approaches fundamentally misunderstand key aspects of German corruption. Specifically, purely economic models that reduce corruption to principal-agent problems or transaction costs risk missing the historical, cultural, and political dimensions that both Alemann and Wolf emphasize in different ways.",
+                        defense: "When faced with such approaches in collaborative settings, rather than attempting to change their proponents' views directly, I would employ strategies grounded in the Alemann-Wolf framework. Drawing from Alemann's institutional analysis, I could show how structural factors constrain economic behaviors. Using Wolf's policy analysis, I could demonstrate how political factors shape anti-corruption measures. I could articulate my position in ways that highlight its complementarity with economic approaches while still defending its distinctive insights.",
+                        tactics: "Concretely, I might: 1) Frame Alemann's institutional analysis as providing necessary context for economic models rather than challenging them; 2) Present Wolf's policy analysis as showing implementation realities that economic models often overlook; 3) Use case studies from both pre and post Merkel periods to illustrate the limitations of approaches that overlook historical, institutional, and policy dimensions.",
+                        contribution: "This strategic approach, grounded in the dual framework of Alemann and Wolf, would allow me to defend the insights generated by my positionality while still participating productively in interdisciplinary discussions about corruption in Germany."
+                    },
+                    integration: {
+                        approach: "My positionality, situated at the intersection of Alemann's institutional analysis and Wolf's policy focus, enables me to integrate insights from both frameworks to understand corruption in Germany. Rather than privileging one perspective, I can synthesize structural, policy, historical, and cultural analyses.",
+                        strategies: "To leverage this integrative positionality, I would employ systematic synthesis strategies: 1) Identify core insights from both Alemann and Wolf; 2) Map areas of consensus and disagreement between institutional and policy perspectives; 3) Develop integrative frameworks that preserve valuable insights while resolving contradictions; 4) Apply these frameworks to specific cases of German corruption across different historical periods.",
+                        application: "For example, when analyzing the CDU donation scandal, I could integrate Alemann's institutional analysis of political financing systems with Wolf's policy analysis of reform attempts. When examining Wirecard, I could combine institutional analysis of regulatory frameworks with policy analysis of enforcement mechanisms. This multi-dimensional approach would provide a more comprehensive understanding than any single perspective alone.",
+                        contribution: "This integrative approach, grounded in the Alemann-Wolf framework, would make me a valuable contributor to interdisciplinary research teams and enable me to produce analyses that speak to multiple scholarly communities while maintaining methodological rigor within each domain."
+                    }
+                },
+                step3: {
+                    researchIntegration: {
+                        introduction: "Integrating scholarly research with personal positionality requires careful navigation of methodological boundaries and epistemological assumptions. In this section, I will examine how my positionality shapes my engagement with specific research on corruption in Germany, particularly the foundational works of Alemann (1995) and Wolf (2021).",
+                        methodology: "My positionality leads me to privilege methodological approaches that bridge institutional and policy analyses. When evaluating research, I tend to value studies that, like Alemann, provide rich institutional context or, like Wolf, offer detailed policy analysis. However, my positionality also makes me particularly attentive to research that integrates multiple perspectives or addresses the limitations of single-framework approaches.",
+                        criticalEngagement: "When reading research on German corruption, my positionality leads me to ask particular questions: How does this study account for historical context across different periods? What institutional assumptions does it make (following Alemann)? What policy implications does it have (following Wolf)? How does it conceptualize the relationship between structure and agency? For example, when reading economic studies that model corruption as a transaction cost, I supplement this analysis with Alemann's institutional questions and Wolf's policy considerations.",
+                        synthesis: "This critical engagement, grounded in the Alemann-Wolf framework, enables me to synthesize diverse research findings into coherent analyses. By understanding how different methodological approaches illuminate different aspects of corruption, I can construct more comprehensive understandings than any single study provides, while remaining aware of the limitations and assumptions of each approach."
+                    },
+                    personalResearch: {
+                        introduction: "My positionality not only shapes how I read existing research but also informs the research questions I pursue and the methodologies I employ in my own investigations of corruption in Germany, particularly in relation to the Alemann-Wolf analytical framework.",
+                        researchQuestions: "My personal background and engagement with Alemann and Wolf lead me to ask research questions that might not occur to researchers with different positionalities. For example: How do family histories of corruption experiences shape contemporary attitudes toward governance across different generations? How do historical patterns identified by Alemann persist despite policy changes analyzed by Wolf? How do cultural norms about authority and compliance interact with both institutional structures and policy measures? How can we integrate Alemann's institutional insights with Wolf's policy analysis for more effective anti-corruption strategies?",
+                        methodologicalApproach: "My positionality inclines me toward mixed-methods approaches that combine Alemann-style institutional analysis with Wolf-style policy evaluation. I would likely employ historical document analysis (for institutional context), policy analysis (for reform evaluation), interviews with stakeholders (for experiential dimensions), and statistical analysis of corruption data (for patterns and trends). This approach would bridge the methodological divide between Alemann and Wolf while adding experiential and cultural dimensions.",
+                        contribution: "This research approach, grounded in my specific positionality and the Alemann-Wolf framework, would contribute distinctive insights to the field of corruption studies while remaining engaged with established scholarly conversations and methodologies. It would particularly contribute to bridging institutional and policy analyses for a more comprehensive understanding of corruption in Germany."
+                    }
+                }
+            },
+            
+            translations: {
+                en: {
+                    title: "Positionality Essay Assistant",
+                    subtitle: "Structured positionality writing on corruption in Germany: Pre vs. Post Merkel Era | UCL Positionality Paper Framework",
+                    topicLabel: "Essay Topic / Research Question",
+                    topicPlaceholder: "Enter your specific research question...",
+                    factorsLabel: "Your Positionality Factors (Select all that apply)",
+                    backgroundLabel: "Your Personal Background & Experiences",
+                    backgroundPlaceholder: "Describe your background, experiences, education, and how they might influence your perspective on corruption in Germany...",
+                    approachLabel: "Writing Approach (Based on UCL Guidelines)",
+                    step2Label: "Step 2 Approach: How this helps you be better",
+                    uploadTitle: "Upload Scholarly Articles",
+                    refreshBtn: "Refresh Essay Structure",
+                    translationBtn: "Show/Hide Translation Panel",
+                    structureTitle: "Positionality Essay Structure",
+                    articlesTitle: "Core Framework & Relevant Scholarly Articles",
+                    footer1: "Positionality Essay Assistant | Based on UCL 'Writing a Positionality Paper' Guidelines | Focus: Corruption in Germany Pre vs. Post Merkel Era",
+                    footer2: "Core analytical framework: Alemann (1995) for pre-Merkel institutional analysis & Wolf (2021) for post-Merkel policy change analysis.",
+                    footer3: "Note: Always conduct original research, properly cite sources, and ensure academic integrity in your work."
+                },
+                de: {
+                    title: "Positionalitäts-Essay-Assistent",
+                    subtitle: "Strukturiertes Schreiben über Positionalität zu Korruption in Deutschland: Vor vs. Nach der Merkel-Ära | UCL Positionalitäts-Papier-Rahmen",
+                    topicLabel: "Essay-Thema / Forschungsfrage",
+                    topicPlaceholder: "Geben Sie Ihre spezifische Forschungsfrage ein...",
+                    factorsLabel: "Ihre Positionalitätsfaktoren (Wählen Sie alle zutreffenden aus)",
+                    backgroundLabel: "Ihr persönlicher Hintergrund & Erfahrungen",
+                    backgroundPlaceholder: "Beschreiben Sie Ihren Hintergrund, Erfahrungen, Ausbildung und wie diese Ihre Perspektive auf Korruption in Deutschland beeinflussen könnten...",
+                    approachLabel: "Schreibansatz (Basierend auf UCL-Richtlinien)",
+                    step2Label: "Schritt 2 Ansatz: Wie Ihnen das hilft, besser zu sein",
+                    uploadTitle: "Wissenschaftliche Artikel hochladen",
+                    refreshBtn: "Essay-Struktur aktualisieren",
+                    translationBtn: "Übersetzungsfeld ein-/ausblenden",
+                    structureTitle: "Positionalitäts-Essay-Struktur",
+                    articlesTitle: "Kernrahmen & relevante wissenschaftliche Artikel",
+                    footer1: "Positionalitäts-Essay-Assistent | Basierend auf UCL-Richtlinien 'Writing a Positionality Paper' | Fokus: Korruption in Deutschland vor vs. nach der Merkel-Ära",
+                    footer2: "Kernanalytischer Rahmen: Alemann (1995) für prä-Merkel institutionelle Analyse & Wolf (2021) für post-Merkel Politikänderungsanalyse.",
+                    footer3: "Hinweis: Führen Sie immer eigene Recherchen durch, zitieren Sie Quellen ordnungsgemäß und stellen Sie akademische Integrität in Ihrer Arbeit sicher."
+                },
+                th: {
+                    title: "ผู้ช่วยเรียงความตำแหน่งแห่งที่",
+                    subtitle: "การเขียนเรียงความตำแหน่งแห่งที่มีโครงสร้างเกี่ยวกับการทุจริตในเยอรมนี: ยุคก่อนเมร์เคล vs ยุคหลังเมร์เคล | กรอบงานเอกสารตำแหน่งแห่งที่ของ UCL",
+                    topicLabel: "หัวข้อเรียงความ / คำถามวิจัย",
+                    topicPlaceholder: "ป้อนคำถามวิจัยเฉพาะของคุณ...",
+                    factorsLabel: "ปัจจัยตำแหน่งแห่งที่ของคุณ (เลือกทั้งหมดที่เกี่ยวข้อง)",
+                    backgroundLabel: "ภูมิหลังและประสบการณ์ส่วนตัวของคุณ",
+                    backgroundPlaceholder: "อธิบายภูมิหลัง ประสบการณ์ การศึกษา และวิธีการที่อาจมีอิทธิพลต่อมุมมองของคุณเกี่ยวกับการทุจริตในเยอรมนี...",
+                    approachLabel: "แนวทางการเขียน (ตามแนวทางของ UCL)",
+                    step2Label: "แนวทางขั้นตอนที่ 2: สิ่งนี้ช่วยให้คุณดีขึ้นได้อย่างไร",
+                    uploadTitle: "อัพโหลดบทความทางวิชาการ",
+                    refreshBtn: "รีเฟรชโครงสร้างเรียงความ",
+                    translationBtn: "แสดง/ซ่อนแผงแปลภาษา",
+                    structureTitle: "โครงสร้างเรียงความตำแหน่งแห่งที่",
+                    articlesTitle: "กรอบหลักและบทความทางวิชาการที่เกี่ยวข้อง",
+                    footer1: "ผู้ช่วยเรียงความตำแหน่งแห่งที่ | อ้างอิงจากแนวทางของ UCL 'Writing a Positionality Paper' | โฟกัส: การทุจริตในเยอรมนียุคก่อน vs ยุคหลังเมร์เคล",
+                    footer2: "กรอบการวิเคราะห์หลัก: Alemann (1995) สำหรับการวิเคราะห์เชิงสถาบันก่อนเมร์เคล & Wolf (2021) สำหรับการวิเคราะห์การเปลี่ยนแปลงนโยบายหลังเมร์เคล",
+                    footer3: "หมายเหตุ: ทำการวิจัยต้นฉบับเสมอ อ้างอิงแหล่งที่มาอย่างถูกต้อง และรับรองความซื่อสัตย์ทางวิชาการในงานของคุณ"
+                },
+                zh: {
+                    title: "立场性论文助手",
+                    subtitle: "关于德国腐败的结构化立场性写作：默克尔时代前后对比 | UCL 立场性论文框架",
+                    topicLabel: "论文题目 / 研究问题",
+                    topicPlaceholder: "输入您的具体研究问题...",
+                    factorsLabel: "您的立场性因素（选择所有适用的）",
+                    backgroundLabel: "您的个人背景与经历",
+                    backgroundPlaceholder: "描述您的背景、经历、教育以及这些如何影响您对德国腐败的看法...",
+                    approachLabel: "写作方法（基于 UCL 指南）",
+                    step2Label: "第二步方法：这如何帮助您变得更好",
+                    uploadTitle: "上传学术文章",
+                    refreshBtn: "刷新论文结构",
+                    translationBtn: "显示/隐藏翻译面板",
+                    structureTitle: "立场性论文结构",
+                    articlesTitle: "核心框架与相关学术文章",
+                    footer1: "立场性论文助手 | 基于 UCL '撰写立场性论文' 指南 | 重点：默克尔时代前后的德国腐败",
+                    footer2: "核心分析框架：Alemann (1995) 用于默克尔前制度分析 & Wolf (2021) 用于默克尔后政策变化分析。",
+                    footer3: "注意：始终进行原创研究，正确引用来源，并确保您工作中的学术诚信。"
+                }
+            }
+        };
+
+        // DOM elements
+        const languageSelect = document.getElementById('languageSelect');
+        const generateBtn = document.getElementById('generateBtn');
+        const structureOutput = document.getElementById('structureOutput');
+        const articlesContainer = document.getElementById('articlesContainer');
+        const positionalityFactors = document.getElementById('positionalityFactors');
+        const translationBox = document.getElementById('translationBox');
+        const translationText = document.getElementById('translationText');
+        const copyTranslationBtn = document.getElementById('copyTranslation');
+        const toggleTranslationBtn = document.getElementById('toggleTranslation');
+        const translationLanguage = document.getElementById('translationLanguage');
+        const step1Btn = document.getElementById('step1');
+        const step2Btn = document.getElementById('step2');
+        const step3Btn = document.getElementById('step3');
+        const optionCards = document.querySelectorAll('.option-card');
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadedArticles = document.getElementById('uploadedArticles');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const liveUpdateNotice = document.getElementById('liveUpdate');
+        const frameworkModal = document.getElementById('frameworkModal');
+        
+        // Application state
+        let currentLanguage = 'en';
+        let currentStep = 'step1';
+        let selectedOption = 'optionC';
+        let uploadedFiles = [];
+        let lastUpdateTime = 0;
+        let updateCooldown = 1000; // ms between updates
+        
+        // Initialize positionality factors
+        function initializeFactors() {
+            positionalityFactors.innerHTML = '';
+            positionalityData.factors.forEach(factor => {
+                const factorHTML = `
+                <div class="factor-checkbox">
+                    <input type="checkbox" id="factor-${factor.id}" ${['nationality', 'politics', 'age', 'class', 'language', 'experience', 'education'].includes(factor.id) ? 'checked' : ''}>
+                    <label for="factor-${factor.id}">${factor.label}</label>
+                </div>
+                `;
+                positionalityFactors.innerHTML += factorHTML;
+            });
+            
+            // Add event listeners to checkboxes
+            document.querySelectorAll('.factor-checkbox input').forEach(checkbox => {
+                checkbox.addEventListener('change', debouncedUpdateEssay);
+            });
+        }
+        
+        // Display scholarly articles with key papers highlighted
+        function displayArticles() {
+            articlesContainer.innerHTML = '';
+            
+            // Display key papers first
+            const keyPapers = positionalityData.scholarlyArticles.filter(article => article.isKeyPaper);
+            const otherPapers = positionalityData.scholarlyArticles.filter(article => !article.isKeyPaper);
+            
+            // Add framework introduction
+            articlesContainer.innerHTML += `
+            <div class="framework-reference" style="margin-bottom: 20px;">
+                <h4><i class="fas fa-sitemap"></i> Core Analytical Framework</h4>
+                <p>This positionality essay uses two key papers as analytical frameworks:</p>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li><strong>Alemann (1995):</strong> Institutional analysis of pre-Merkel corruption</li>
+                    <li><strong>Wolf (2021):</strong> Policy change analysis of post-Merkel anti-corruption measures</li>
+                </ul>
+                <p>These frameworks provide the structural basis for comparing corruption across different historical periods in Germany.</p>
+            </div>
+            `;
+            
+            // Display key papers
+            keyPapers.forEach(article => {
+                const eraClass = article.era === 'pre' ? 'era-pre' : article.era === 'post' ? 'era-post' : 'era-both';
+                const eraText = article.era === 'pre' ? 'Pre-Merkel' : article.era === 'post' ? 'Post-Merkel' : 'Both Periods';
+                
+                const articleHTML = `
+                <div class="article-item key-paper">
+                    <div class="article-title">${article.title} (${article.year}) 
+                        <span class="paper-era ${eraClass}">${eraText}</span>
+                        <span style="background: #e74c3c; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px;">CORE FRAMEWORK</span>
+                    </div>
+                    <div class="article-authors">${article.authors}</div>
+                    <div class="article-authors"><i>${article.journal}</i> ${article.doi ? `• DOI: ${article.doi}` : ''}</div>
+                    <div style="font-size: 0.9rem; margin: 8px 0; color: #555;">${article.abstract}</div>
+                    
+                    <div class="ai-summary">
+                        <h4><i class="fas fa-robot"></i> AI Summary - Framework Analysis</h4>
+                        <p>${article.aiSummary}</p>
+                        <p style="margin-top: 8px; font-style: italic; color: #c0392b;">
+                            <i class="fas fa-star"></i> <strong>Framework Role:</strong> ${article.era === 'pre' ? 'Provides institutional analysis framework for pre-Merkel period' : article.era === 'post' ? 'Provides policy change analysis framework for post-Merkel period' : 'Provides comparative framework across periods'}
+                        </p>
+                    </div>
+                    
+                    <a href="${article.link}" target="_blank" class="article-link">
+                        <i class="fas fa-external-link-alt"></i> Access Full Article
+                    </a>
+                    <button class="translate-btn" onclick="translateArticle(${article.id})" style="margin-left: 10px;">
+                        <i class="fas fa-language"></i> Translate Summary
+                    </button>
+                </div>
+                `;
+                articlesContainer.innerHTML += articleHTML;
+            });
+            
+            // Display other papers
+            otherPapers.forEach(article => {
+                const eraClass = article.era === 'pre' ? 'era-pre' : article.era === 'post' ? 'era-post' : 'era-both';
+                const eraText = article.era === 'pre' ? 'Pre-Merkel' : article.era === 'post' ? 'Post-Merkel' : 'Both Periods';
+                
+                const articleHTML = `
+                <div class="article-item">
+                    <div class="article-title">${article.title} (${article.year}) 
+                        <span class="paper-era ${eraClass}">${eraText}</span>
+                    </div>
+                    <div class="article-authors">${article.authors}</div>
+                    <div class="article-authors"><i>${article.journal}</i> ${article.doi ? `• DOI: ${article.doi}` : ''}</div>
+                    <div style="font-size: 0.9rem; margin: 8px 0; color: #555;">${article.abstract}</div>
+                    
+                    <div class="ai-summary">
+                        <h4><i class="fas fa-robot"></i> AI Summary</h4>
+                        <p>${article.aiSummary}</p>
+                    </div>
+                    
+                    <a href="${article.link}" target="_blank" class="article-link">
+                        <i class="fas fa-external-link-alt"></i> Access Full Article
+                    </a>
+                    <button class="translate-btn" onclick="translateArticle(${article.id})" style="margin-left: 10px;">
+                        <i class="fas fa-language"></i> Translate Summary
+                    </button>
+                </div>
+                `;
+                articlesContainer.innerHTML += articleHTML;
+            });
+        }
+        
+        // Generate essay structure with real-time updates
+        function generateEssayStructure(showLoading = false) {
+            const now = Date.now();
+            if (now - lastUpdateTime < updateCooldown && !showLoading) {
+                return; // Skip if too soon since last update
+            }
+            lastUpdateTime = now;
+            
+            if (showLoading) {
+                loadingIndicator.style.display = 'flex';
+                structureOutput.style.overflow = 'hidden';
+            }
+            
+            // Get user inputs
+            const topic = document.getElementById('essayTopic').value;
+            const personalBackground = document.getElementById('personalBackground').value;
+            const step2Approach = document.getElementById('step2approach').value;
+            
+            // Get selected factors
+            const selectedFactors = [];
+            document.querySelectorAll('.factor-checkbox input:checked').forEach(cb => {
+                const label = cb.parentElement.querySelector('label').textContent;
+                selectedFactors.push(label);
+            });
+            
+            // Get structure based on current step and selected option
+            let structure;
+            if (currentStep === 'step1') {
+                structure = positionalityData.positionalityStructures.step1[selectedOption.substring(6)];
+            } else if (currentStep === 'step2') {
+                structure = positionalityData.positionalityStructures.step2[step2Approach];
+            } else {
+                structure = positionalityData.positionalityStructures.step3.researchIntegration;
+            }
+            
+            // Generate HTML
+            let html = '';
+            
+            if (currentStep === 'step1') {
+                html = `
+                <div class="essay-section" id="section-intro">
+                    <div class="section-header">
+                        <div class="section-title-small">Positionality Analysis: ${topic}</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('intro')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('intro')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${structure.introduction}</p>
+                    <div class="framework-reference">
+                        <h4><i class="fas fa-book"></i> Analytical Framework Reference</h4>
+                        <p>This analysis employs the dual framework of <strong>Alemann (1995)</strong> for pre-Merkel institutional analysis and <strong>Wolf (2021)</strong> for post-Merkel policy change analysis. These complementary frameworks provide the structural basis for examining corruption across different historical periods in Germany.</p>
+                    </div>
+                </div>
+                
+                <div class="essay-section" id="section-factors">
+                    <div class="section-header">
+                        <div class="section-title-small">My Positionality Factors</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('factors')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('factors')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p><strong>Selected factors influencing my perspective:</strong> ${selectedFactors.join(', ')}</p>
+                    <p><strong>Personal background:</strong> ${personalBackground}</p>
+                    <p>${selectedOption === 'optionA' ? structure.personalFactors : selectedOption === 'optionB' ? structure.othersPositions : structure.fieldFactors}</p>
+                    <div class="supporting-text">
+                        <strong>Framework Integration:</strong> These factors shape how I engage with both Alemann's institutional analysis and Wolf's policy change framework when analyzing German corruption cases across different historical periods.
+                    </div>
+                </div>
+                
+                <div class="essay-section" id="section-context">
+                    <div class="section-header">
+                        <div class="section-title-small">Positionality in Scholarly Context</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('context')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('context')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${selectedOption === 'optionA' ? structure.comparisonToOthers : selectedOption === 'optionB' ? structure.personalComparison : structure.personalPositioning}</p>
+                </div>
+                
+                <div class="essay-section" id="section-synthesis">
+                    <div class="section-header">
+                        <div class="section-title-small">Synthesis: My Position in the Field</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('synthesis')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('synthesis')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${selectedOption === 'optionA' ? structure.contextualization : selectedOption === 'optionB' ? structure.synthesis : structure.synthesis}</p>
+                    <div class="supporting-text">
+                        <strong>Framework Application:</strong> My positionality ${selectedOption === 'optionA' ? 'emphasizes how personal experience mediates engagement with both Alemann and Wolf\'s frameworks' : selectedOption === 'optionB' ? 'highlights both differences from and connections to the Alemann-Wolf analytical framework' : 'occupies an interstitial space between institutional and policy analyses represented by Alemann and Wolf'} when analyzing corruption in Germany.
+                    </div>
+                </div>
+                `;
+            } else if (currentStep === 'step2') {
+                html = `
+                <div class="essay-section" id="section-step2intro">
+                    <div class="section-header">
+                        <div class="section-title-small">How This Self-Awareness Helps Me Be Better</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('step2intro')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('step2intro')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p><strong>Approach:</strong> ${step2Approach === 'compromise' ? 'Strategies for Compromising' : step2Approach === 'growth' ? 'Acknowledging Personal Growth' : step2Approach === 'digheels' ? 'Digging in My Heels (Maintain Position)' : 'Integrate Multiple Perspectives'}</p>
+                    <p>${structure.approach}</p>
+                    <div class="framework-reference">
+                        <h4><i class="fas fa-sitemap"></i> Framework Integration</h4>
+                        <p>This self-improvement strategy is informed by engagement with both <strong>Alemann's institutional analysis</strong> and <strong>Wolf's policy change framework</strong>, recognizing the strengths and limitations of each approach for understanding corruption in different historical contexts.</p>
+                    </div>
+                </div>
+                
+                <div class="essay-section" id="section-strategies">
+                    <div class="section-header">
+                        <div class="section-title-small">${step2Approach === 'compromise' ? 'Conflict Resolution Strategies' : step2Approach === 'growth' ? 'Evolution of My Positionality' : step2Approach === 'digheels' ? 'Defensive Strategies' : 'Integration Strategies'}</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('strategies')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('strategies')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${step2Approach === 'compromise' ? structure.strategies : step2Approach === 'growth' ? structure.evolution : step2Approach === 'digheels' ? structure.defense : structure.strategies}</p>
+                </div>
+                
+                <div class="essay-section" id="section-application">
+                    <div class="section-header">
+                        <div class="section-title-small">${step2Approach === 'compromise' ? 'Practical Application' : step2Approach === 'growth' ? 'Integration of New Perspectives' : step2Approach === 'digheels' ? 'Strategic Tactics' : 'Practical Application'}</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('application')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('application')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${step2Approach === 'compromise' ? structure.application : step2Approach === 'growth' ? structure.integration : step2Approach === 'digheels' ? structure.tactics : structure.application}</p>
+                </div>
+                
+                <div class="essay-section" id="section-contribution">
+                    <div class="section-header">
+                        <div class="section-title-small">Contributing More Effectively</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('contribution')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('contribution')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${structure.growth || structure.contribution || ''}</p>
+                    <div class="supporting-text">
+                        <strong>Framework Reflection:</strong> This self-awareness, informed by engagement with both <strong>Alemann (1995)</strong> and <strong>Wolf (2021)</strong>, ${step2Approach === 'compromise' ? 'enables more productive collaboration across methodological divides while respecting different analytical frameworks' : step2Approach === 'growth' ? 'represents meaningful development in my analytical approach through engagement with complementary frameworks' : step2Approach === 'digheels' ? 'helps me defend important insights while remaining engaged with multiple analytical frameworks' : 'enhances my ability to synthesize diverse perspectives into coherent analyses while maintaining framework integrity'}.
+                    </div>
+                </div>
+                `;
+            } else {
+                html = `
+                <div class="essay-section" id="section-research">
+                    <div class="section-header">
+                        <div class="section-title-small">Research Integration and Positionality</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('research')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('research')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${structure.introduction}</p>
+                    <div class="framework-reference">
+                        <h4><i class="fas fa-book"></i> Core Framework Integration</h4>
+                        <p>This research integration is structured around the dual analytical framework of <strong>Alemann (1995)</strong> for pre-Merkel institutional analysis and <strong>Wolf (2021)</strong> for post-Merkel policy change analysis. These complementary frameworks provide the foundation for examining corruption across different historical periods in Germany.</p>
+                    </div>
+                </div>
+                
+                <div class="essay-section" id="section-methodology">
+                    <div class="section-header">
+                        <div class="section-title-small">Methodological Implications</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('methodology')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('methodology')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${structure.methodology}</p>
+                    <div class="supporting-text">
+                        <strong>Framework Application:</strong> When evaluating research, my positionality leads me to ask how studies engage with or challenge the core frameworks of <strong>Alemann (institutional analysis)</strong> and <strong>Wolf (policy change analysis)</strong>. This dual-framework approach provides a comprehensive basis for assessing research on German corruption.
+                    </div>
+                </div>
+                
+                <div class="essay-section" id="section-critical">
+                    <div class="section-header">
+                        <div class="section-title-small">Critical Engagement with Research</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('critical')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('critical')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${structure.criticalEngagement}</p>
+                </div>
+                
+                <div class="essay-section" id="section-researchsynthesis">
+                    <div class="section-header">
+                        <div class="section-title-small">Synthesis of Research Insights</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('researchsynthesis')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                            <button class="translate-btn" onclick="translateSection('researchsynthesis')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                    <p>${structure.synthesis}</p>
+                    <div class="supporting-text">
+                        <strong>Applied Example:</strong> When synthesizing research on corruption in Germany, my positionality enables me to integrate <strong>Alemann's institutional insights</strong> with <strong>Wolf's policy analysis</strong> to create comprehensive understandings that bridge different historical periods and methodological approaches.
+                    </div>
+                </div>
+                `;
+            }
+            
+            // Add uploaded article references if available
+            if (uploadedFiles.length > 0 && currentStep === 'step3') {
+                html += `
+                <div class="essay-section" id="section-uploaded">
+                    <div class="section-header">
+                        <div class="section-title-small">Integration of Uploaded Research</div>
+                        <div>
+                            <button class="copy-btn" onclick="copySection('uploaded')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                    <p>The following uploaded articles have informed my positionality analysis and engagement with the Alemann-Wolf framework:</p>
+                    <ul style="padding-left: 20px; margin-top: 10px;">
+                        ${uploadedFiles.map(file => `<li><strong>${file.name}</strong>: ${file.aiSummary || 'AI analysis pending'}</li>`).join('')}
+                    </ul>
+                </div>
+                `;
+            }
+            
+            // Update the output
+            setTimeout(() => {
+                structureOutput.innerHTML = html;
+                loadingIndicator.style.display = 'none';
+                structureOutput.style.overflow = 'auto';
+                
+                // Show live update notice
+                if (!showLoading) {
+                    showLiveUpdateNotice();
+                }
+            }, showLoading ? 800 : 100);
+        }
+        
+        // Debounce function for real-time updates
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Show live update notice
+        function showLiveUpdateNotice() {
+            liveUpdateNotice.style.display = 'flex';
+            setTimeout(() => {
+                liveUpdateNotice.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Show framework details modal
+        window.showFrameworkDetails = function() {
+            frameworkModal.style.display = 'flex';
+        };
+        
+        // Close framework modal
+        window.closeFrameworkModal = function() {
+            frameworkModal.style.display = 'none';
+        };
+        
+        // Close modal when clicking outside
+        frameworkModal.addEventListener('click', function(e) {
+            if (e.target === frameworkModal) {
+                closeFrameworkModal();
+            }
+        });
+        
+        // Copy section to clipboard
+        window.copySection = function(sectionType) {
+            const section = document.getElementById(`section-${sectionType}`);
+            if (!section) return;
+            
+            const title = section.querySelector('.section-title-small').textContent;
+            const content = section.querySelector('p').textContent;
+            const supporting = section.querySelector('.supporting-text') ? 
+                '\n\n' + section.querySelector('.supporting-text').textContent : '';
+            const framework = section.querySelector('.framework-reference') ?
+                '\n\n' + section.querySelector('.framework-reference').textContent : '';
+            
+            const textToCopy = `${title}\n\n${content}${supporting}${framework}`;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Section copied to clipboard!');
+            });
+        };
+        
+        // Translate section
+        window.translateSection = async function(sectionType) {
+            const section = document.getElementById(`section-${sectionType}`);
+            if (!section) return;
+            
+            const title = section.querySelector('.section-title-small').textContent;
+            const content = section.querySelector('p').textContent;
+            const supporting = section.querySelector('.supporting-text') ? 
+                section.querySelector('.supporting-text').textContent : '';
+            const framework = section.querySelector('.framework-reference') ?
+                section.querySelector('.framework-reference').textContent : '';
+            
+            const textToTranslate = `${title}\n\n${content}\n\n${supporting}\n\n${framework}`;
+            const targetLanguage = translationLanguage.value;
+            
+            // Simulate translation with a progress bar
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+            
+            for (let i = 0; i <= 100; i += 10) {
+                setTimeout(() => {
+                    progressFill.style.width = `${i}%`;
+                }, i * 20);
+            }
+            
+            // Simulated translation (in a real app, this would be an API call)
+            setTimeout(() => {
+                const languageNames = {
+                    'en': 'English',
+                    'de': 'German',
+                    'fr': 'French',
+                    'es': 'Spanish',
+                    'th': 'Thai',
+                    'zh': 'Chinese'
+                };
+                
+                const translatedText = `
+Translated to ${languageNames[targetLanguage]}:
+
+${textToTranslate}
+
+[Note: This is a simulated translation. In a full implementation, this text would be translated using Google Translate API or similar service.]
+
+Framework translation notes:
+- Technical terms related to corruption studies are preserved
+- Academic phrasing is maintained
+- References to Alemann (1995) and Wolf (2021) are preserved as core frameworks
+- Cultural references are explained where necessary
+                `;
+                
+                translationText.textContent = translatedText;
+                translationBox.classList.add('active');
+                progressBar.style.display = 'none';
+                progressFill.style.width = '0%';
+            }, 1200);
+        };
+        
+        // Translate article summary
+        window.translateArticle = function(articleId) {
+            const article = positionalityData.scholarlyArticles.find(a => a.id === articleId);
+            if (!article) return;
+            
+            const eraText = article.era === 'pre' ? 'Pre-Merkel Framework' : article.era === 'post' ? 'Post-Merkel Framework' : 'Comparative Framework';
+            const frameworkNote = article.isKeyPaper ? `\n\n[Core Framework: ${eraText}]` : '';
+            
+            const textToTranslate = `${article.title}\n\nAuthors: ${article.authors}\n\nAbstract: ${article.abstract}\n\nAI Summary: ${article.aiSummary}${frameworkNote}`;
+            const targetLanguage = translationLanguage.value;
+            
+            // Simulate translation
+            const languageNames = {
+                'en': 'English',
+                'de': 'German',
+                'fr': 'French',
+                'es': 'Spanish',
+                'th': 'Thai',
+                'zh': 'Chinese'
+            };
+            
+            translationText.textContent = `
+Article translated to ${languageNames[targetLanguage]}:
+
+${textToTranslate}
+
+[Note: This is a simulated translation. In a real implementation, this would use a translation API.]
+
+Translation completed for academic use. Please verify technical terms and framework references.
+            `;
+            
+            translationBox.classList.add('active');
+        };
+        
+        // Copy translation to clipboard
+        copyTranslationBtn.addEventListener('click', () => {
+            const text = translationText.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Translation copied to clipboard!');
+            });
+        });
+        
+        // Toggle translation panel
+        toggleTranslationBtn.addEventListener('click', () => {
+            if (translationBox.classList.contains('active')) {
+                translationBox.classList.remove('active');
+            } else {
+                translationBox.classList.add('active');
+            }
+        });
+        
+        // Step navigation
+        step1Btn.addEventListener('click', function() {
+            currentStep = 'step1';
+            step1Btn.classList.add('active');
+            step2Btn.classList.remove('active');
+            step3Btn.classList.remove('active');
+            generateEssayStructure(true);
+        });
+        
+        step2Btn.addEventListener('click', function() {
+            currentStep = 'step2';
+            step2Btn.classList.add('active');
+            step1Btn.classList.remove('active');
+            step3Btn.classList.remove('active');
+            generateEssayStructure(true);
+        });
+        
+        step3Btn.addEventListener('click', function() {
+            currentStep = 'step3';
+            step3Btn.classList.add('active');
+            step1Btn.classList.remove('active');
+            step2Btn.classList.remove('active');
+            generateEssayStructure(true);
+        });
+        
+        // Option selection
+        optionCards.forEach(card => {
+            card.addEventListener('click', function() {
+                optionCards.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedOption = this.id;
+                generateEssayStructure();
+            });
+        });
+        
+        // File upload handling
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '#e0f0ff';
+            uploadArea.style.borderColor = '#2980b9';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.background = '#f0f7ff';
+            uploadArea.style.borderColor = '#3498db';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '#f0f7ff';
+            uploadArea.style.borderColor = '#3498db';
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            handleFiles(files);
+        });
+        
+        function handleFiles(files) {
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+            
+            Array.from(files).forEach((file, index) => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File ${file.name} is too large (max 10MB)`);
+                    return;
+                }
+                
+                // Simulate upload and AI analysis
+                setTimeout(() => {
+                    progressFill.style.width = `${((index + 1) / files.length) * 100}%`;
+                    
+                    // Generate AI summary for the file
+                    const aiSummary = generateAISummary(file.name);
+                    
+                    uploadedFiles.push({
+                        id: Date.now() + index,
+                        name: file.name,
+                        size: (file.size / 1024 / 1024).toFixed(2) + ' MB',
+                        type: file.type,
+                        aiSummary: aiSummary,
+                        uploaded: new Date().toLocaleString()
+                    });
+                    
+                    updateUploadedFilesList();
+                    
+                    if (index === files.length - 1) {
+                        setTimeout(() => {
+                            progressBar.style.display = 'none';
+                            progressFill.style.width = '0%';
+                            alert(`${files.length} file(s) uploaded and analyzed successfully!`);
+                            generateEssayStructure();
+                        }, 500);
+                    }
+                }, index * 800);
+            });
+        }
+        
+        function generateAISummary(filename) {
+            const summaries = [
+                "This article examines institutional corruption in post-reunification Germany through the lens of Alemann's framework, focusing on the transition from overt political corruption to complex financial schemes.",
+                "Analysis of anti-corruption measures implemented during the Merkel era, evaluated using Wolf's policy change framework, with assessment of their effectiveness in reducing both political and corporate corruption.",
+                "Case study of German corruption scandals from 1990-2020, identifying patterns and systemic vulnerabilities across different sectors, integrating both Alemann's institutional analysis and Wolf's policy evaluation.",
+                "Comparative study of corruption perceptions in Germany before and after major transparency reforms, using the dual framework of Alemann (pre-Merkel) and Wolf (post-Merkel) for comprehensive analysis.",
+                "Theoretical framework for understanding corruption in advanced industrial democracies, with Germany as a primary case study, engaging with both institutional (Alemann) and policy (Wolf) perspectives."
+            ];
+            
+            return summaries[Math.floor(Math.random() * summaries.length)];
+        }
+        
+        function updateUploadedFilesList() {
+            uploadedArticles.innerHTML = '';
+            
+            if (uploadedFiles.length === 0) {
+                uploadedArticles.innerHTML = '<p style="color: #7f8c8d; text-align: center;">No articles uploaded yet.</p>';
+                return;
+            }
+            
+            uploadedFiles.forEach(file => {
+                const fileHTML = `
+                <div class="uploaded-item">
+                    <div>
+                        <div class="uploaded-title">${file.name}</div>
+                        <div style="font-size: 0.8rem; color: #7f8c8d;">${file.size} • Uploaded: ${file.uploaded}</div>
+                        ${file.aiSummary ? `<div style="font-size: 0.85rem; margin-top: 5px; color: #555;">AI Summary: ${file.aiSummary}</div>` : ''}
+                    </div>
+                    <div class="uploaded-actions">
+                        <button class="analyze-btn" onclick="analyzeFile(${file.id})">
+                            <i class="fas fa-robot"></i> Re-analyze
+                        </button>
+                        <button class="delete-btn" onclick="deleteFile(${file.id})">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+                `;
+                uploadedArticles.innerHTML += fileHTML;
+            });
+        }
+        
+        window.analyzeFile = function(fileId) {
+            const file = uploadedFiles.find(f => f.id === fileId);
+            if (!file) return;
+            
+            alert(`Re-analyzing "${file.name}" with AI...`);
+            file.aiSummary = generateAISummary(file.name);
+            updateUploadedFilesList();
+            generateEssayStructure();
+        };
+        
+        window.deleteFile = function(fileId) {
+            uploadedFiles = uploadedFiles.filter(f => f.id !== fileId);
+            updateUploadedFilesList();
+            generateEssayStructure();
+        };
+        
+        // Update UI based on selected language
+        function updateLanguage() {
+            currentLanguage = languageSelect.value;
+            const translation = positionalityData.translations[currentLanguage] || positionalityData.translations.en;
+            
+            // Update UI elements
+            document.querySelector('h1').innerHTML = `<i class="fas fa-user-edit"></i> ${translation.title}`;
+            document.querySelector('.subtitle').textContent = translation.subtitle;
+            document.querySelector('label[for="essayTopic"]').textContent = translation.topicLabel;
+            document.getElementById('essayTopic').placeholder = translation.topicPlaceholder;
+            document.querySelector('.input-group label').textContent = translation.factorsLabel;
+            document.querySelector('label[for="personalBackground"]').textContent = translation.backgroundLabel;
+            document.getElementById('personalBackground').placeholder = translation.backgroundPlaceholder;
+            document.querySelectorAll('.input-group label')[2].textContent = translation.approachLabel;
+            document.querySelector('label[for="step2approach"]').textContent = translation.step2Label;
+            document.querySelector('.upload-section h3').innerHTML = `<i class="fas fa-upload"></i> ${translation.uploadTitle}`;
+            document.getElementById('generateBtn').innerHTML = `<i class="fas fa-sync-alt"></i> ${translation.refreshBtn}`;
+            document.getElementById('toggleTranslation').innerHTML = `<i class="fas fa-exchange-alt"></i> ${translation.translationBtn}`;
+            document.querySelector('.output-section .section-title').innerHTML = `<i class="fas fa-file-alt"></i> ${translation.structureTitle}`;
+            document.querySelector('.scholar-articles h3').innerHTML = `<i class="fas fa-graduation-cap"></i> ${translation.articlesTitle}`;
+            document.querySelector('.footer p:nth-child(1)').textContent = translation.footer1;
+            document.querySelector('.footer p:nth-child(2)').textContent = translation.footer2;
+            document.querySelector('.footer p:nth-child(3)').innerHTML = `<i class="fas fa-exclamation-circle"></i> ${translation.footer3}`;
+        }
+        
+        // Debounced essay update function
+        const debouncedUpdateEssay = debounce(() => {
+            generateEssayStructure();
+        }, 500);
+        
+        // Initialize
+        languageSelect.addEventListener('change', () => {
+            updateLanguage();
+            generateEssayStructure();
+        });
+        
+        generateBtn.addEventListener('click', () => {
+            generateEssayStructure(true);
+        });
+        
+        // Add real-time update listeners
+        document.getElementById('essayTopic').addEventListener('input', debouncedUpdateEssay);
+        document.getElementById('personalBackground').addEventListener('input', debouncedUpdateEssay);
+        document.getElementById('step2approach').addEventListener('change', debouncedUpdateEssay);
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeFactors();
+            displayArticles();
+            updateLanguage();
+            generateEssayStructure(true);
+            
+            // Auto-update every 30 seconds if user is active
+            setInterval(() => {
+                if (document.hasFocus()) {
+                    generateEssayStructure();
+                }
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
